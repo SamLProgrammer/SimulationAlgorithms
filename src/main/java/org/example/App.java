@@ -1,7 +1,7 @@
 package org.example;
+
 import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.*;
-
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
@@ -28,25 +28,8 @@ public class App
 
         updateCell(spreadsheetId, row, column, "=NORM.S.INV(0,975)");
 
-        row = 5; // Update with the row number (1-based index)
-        column = 5; // Update with the column number (1-based index)
-
-        String value = "New Value"; // Update with the new value
-
-        updateCell(spreadsheetId, row, column, value);
-
         String calculatedResult = getCellValue(spreadsheetId, range);
         System.out.println("Calculated Result: " + calculatedResult);
-    }
-
-    private static void setValueWithFormula(String spreadsheetId, String range, String formula) throws IOException {
-        ValueRange body = new ValueRange()
-                .setValues(Arrays.asList(Arrays.asList(formula)));
-
-        UpdateValuesResponse result = sheetsService.spreadsheets().values()
-                .update(spreadsheetId, range, body)
-                .setValueInputOption("RAW")
-                .execute();
     }
 
     private static String getCellValue(String spreadsheetId, String range) throws IOException {
