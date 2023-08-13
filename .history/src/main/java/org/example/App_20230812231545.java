@@ -13,7 +13,7 @@ public class App {
         MiddleSquare ms = new MiddleSquare();
         Congruent cg = new Congruent();
         // ArrayList<Double> uniformNumbersList = ms.fecadeStartSquaresGeneration(20, "7351");
-        ArrayList<Double> uniformNumbersList = cg.fecadeStartCongruentGeneration(6, 8, 5, 10, 50, 'l');
+        ArrayList<Double> uniformNumbersList = cg.fecadeStartCongruentGeneration(6, 8, 5, 8, 50, 'l');
         printArrayList(uniformNumbersList);
 
     }

@@ -16,7 +16,9 @@ public class MiddleSquare {
         return number*number;
     }
 
-    public ArrayList<Double> fecadeStartSquaresGeneration(int iterations, String seed) {
+    public ArrayList<Double> fecadeStartSquaresGeneration(int iterations) {
+        int length = 4;
+        int seed = getSeed(length);
         ArrayList<Double> risList = new ArrayList<>();
         return startSquaresGeneration("3456", iterations, risList);
     }
