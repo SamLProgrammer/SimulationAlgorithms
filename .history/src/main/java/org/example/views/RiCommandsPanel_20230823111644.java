@@ -32,7 +32,6 @@ public class RiCommandsPanel extends JPanel {
     private JTextField gTextField;
     private JTextField iTextField;
     private JTextField seedTextField;
-    private JTextField nTextField;
     private JPanel statsContainer;
     private JPanel statsContainerCongruential;
     private JPanel statsContainerMiddleSquares;
@@ -157,13 +156,13 @@ public class RiCommandsPanel extends JPanel {
         seedContainer.add(seedTextField);
         statsContainerMiddleSquares.add(seedContainer);
 
-        JPanel nContainer = new JPanel(new BorderLayout());
-        JLabel nLabel = new JLabel("n:");
-        nLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
-        nTextField = new JTextField();
-        nContainer.add(nLabel, BorderLayout.WEST);
-        nContainer.add(nTextField);
-        statsContainerMiddleSquares.add(nContainer);
+        JPanel iContainer = new JPanel(new BorderLayout());
+        JLabel iLabel = new JLabel("n:");
+        iLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
+        iTextField = new JTextField();
+        iContainer.add(iLabel, BorderLayout.WEST);
+        iContainer.add(iTextField);
+        statsContainerMiddleSquares.add(iContainer);
     }
 
     public static void setFontRecursively(Component component, Font font) {
@@ -186,7 +185,7 @@ public class RiCommandsPanel extends JPanel {
     private void generateRandomNumbersList() {
         switch (algorithmChooserBox.getSelectedItem().toString()) {
             case "Middle Squares":
-                controller.generateWithMiddleSquare(Integer.valueOf(nTextField.getText()), seedTextField.getText(), 10);
+                controller.generateWithMiddleSquare(Integer.valueOf(iTextField.getText()), seedTextField.getText(), 10);
                 break;
             case "Congruential":
                 controller.generateWithCongruent(Integer.valueOf(x0TextField.getText()),
@@ -194,7 +193,7 @@ public class RiCommandsPanel extends JPanel {
                         Integer.valueOf(cTextField.getText()),
                         Integer.valueOf(gTextField.getText()),
                         Integer.valueOf(iTextField.getText()), 
-                        'l', 10);
+                        'l');
                 break;
         }
     }

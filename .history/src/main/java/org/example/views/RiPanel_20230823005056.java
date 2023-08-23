@@ -1,5 +1,6 @@
 package org.example.views;
 import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.JPanel;
 
 import org.example.controller.Controller;
@@ -15,6 +16,7 @@ public class RiPanel extends JPanel {
     }
 
     private void initProperties() {
+        setBackground(Color.GREEN);
         setLayout(new BorderLayout());
     }
 

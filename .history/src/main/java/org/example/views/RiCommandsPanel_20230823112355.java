@@ -186,7 +186,7 @@ public class RiCommandsPanel extends JPanel {
     private void generateRandomNumbersList() {
         switch (algorithmChooserBox.getSelectedItem().toString()) {
             case "Middle Squares":
-                controller.generateWithMiddleSquare(Integer.valueOf(nTextField.getText()), seedTextField.getText(), 10);
+                controller.generateWithMiddleSquare(Integer.valueOf(iTextField.getText()), seedTextField.getText(), 10);
                 break;
             case "Congruential":
                 controller.generateWithCongruent(Integer.valueOf(x0TextField.getText()),

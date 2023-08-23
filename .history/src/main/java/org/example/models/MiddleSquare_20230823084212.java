@@ -25,7 +25,7 @@ public class MiddleSquare {
             System.out.println("=========== Iteration " + iterations + " ===========");
             int seed = Integer.valueOf(seedString);
             int sqrdSeed = intToSquare(seed);
-            sqrdSeed = (sqrdSeed < 1) ? sqrdSeed*-1 : sqrdSeed;
+            sqrdSeed = (sqrdSeed < 1) ? sqrdSeed*-1; sqrdSeed;
             String stringSqrdSeed = String.valueOf(sqrdSeed);
 
             while(stringSqrdSeed.length() < (seedString.length() * 2)) {

@@ -1,10 +1,7 @@
 package org.example.views;
 
 import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Container;
 import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,7 +10,6 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
-import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -32,7 +28,6 @@ public class RiCommandsPanel extends JPanel {
     private JTextField gTextField;
     private JTextField iTextField;
     private JTextField seedTextField;
-    private JTextField nTextField;
     private JPanel statsContainer;
     private JPanel statsContainerCongruential;
     private JPanel statsContainerMiddleSquares;
@@ -69,13 +64,11 @@ public class RiCommandsPanel extends JPanel {
                         statsContainer.add(statsContainerCongruential);
                         System.out.println(statsContainerCongruential.getLayout().getClass());
                         statsContainer.updateUI();
-                        resetFontRecursively();
                         break;
-                    case "Middle Squares":
+                        case "Middle Squares":
                         statsContainer.removeAll();
                         statsContainer.add(statsContainerMiddleSquares);
                         statsContainer.updateUI();
-                        resetFontRecursively();
                         break;
                 }
             }
@@ -86,7 +79,7 @@ public class RiCommandsPanel extends JPanel {
 
         statsContainer = new JPanel(new BorderLayout());
         statsContainerCongruential = new JPanel(new GridLayout(1, 5, 10, 10));
-        statsContainerMiddleSquares = new JPanel(new GridLayout(1, 2, 20, 20));
+        statsContainerMiddleSquares = new JPanel(new BorderLayout());
 
         fillStatsPanelForCongruential();
         fillStatsPanelForMiddleSquares();
@@ -99,11 +92,6 @@ public class RiCommandsPanel extends JPanel {
 
         add(submitGenerationButton);
 
-        resetFontRecursively();
-    }
-
-    private void resetFontRecursively() {
-        setFontRecursively(myInstance(), new Font("Oswald", Font.BOLD, 30));
     }
 
     private void fillStatsPanelForCongruential() {
@@ -140,7 +128,7 @@ public class RiCommandsPanel extends JPanel {
         statsContainerCongruential.add(gContainer);
 
         JPanel iContainer = new JPanel(new BorderLayout());
-        JLabel iLabel = new JLabel("n:");
+        JLabel iLabel = new JLabel("i:");
         iLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
         iTextField = new JTextField();
         iContainer.add(iLabel, BorderLayout.WEST);
@@ -149,34 +137,8 @@ public class RiCommandsPanel extends JPanel {
     }
 
     private void fillStatsPanelForMiddleSquares() {
-        JPanel seedContainer = new JPanel(new BorderLayout());
-        JLabel seedLabel = new JLabel("seed:");
-        seedLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
-        seedTextField = new JTextField();
-        seedContainer.add(seedLabel, BorderLayout.WEST);
-        seedContainer.add(seedTextField);
-        statsContainerMiddleSquares.add(seedContainer);
-
-        JPanel nContainer = new JPanel(new BorderLayout());
-        JLabel nLabel = new JLabel("n:");
-        nLabel.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 10));
-        nTextField = new JTextField();
-        nContainer.add(nLabel, BorderLayout.WEST);
-        nContainer.add(nTextField);
-        statsContainerMiddleSquares.add(nContainer);
-    }
-
-    public static void setFontRecursively(Component component, Font font) {
-        if (component instanceof JComponent) {
-            ((JComponent) component).setFont(font);
-        }
-
-        if (component instanceof Container) {
-            Component[] children = ((Container) component).getComponents();
-            for (Component child : children) {
-                setFontRecursively(child, font);
-            }
-        }
+        JPanel panel = new JPanel();
+        statsContainerMiddleSquares.add(panel);
     }
 
     private RiCommandsPanel myInstance() {
@@ -184,19 +146,8 @@ public class RiCommandsPanel extends JPanel {
     }
 
     private void generateRandomNumbersList() {
-        switch (algorithmChooserBox.getSelectedItem().toString()) {
-            case "Middle Squares":
-                controller.generateWithMiddleSquare(Integer.valueOf(nTextField.getText()), seedTextField.getText(), 10);
-                break;
-            case "Congruential":
-                controller.generateWithCongruent(Integer.valueOf(x0TextField.getText()),
-                        Integer.valueOf(kTextField.getText()),
-                        Integer.valueOf(cTextField.getText()),
-                        Integer.valueOf(gTextField.getText()),
-                        Integer.valueOf(iTextField.getText()), 
-                        'l', 10);
-                break;
-        }
+        controller.generateWithMiddleSquare(198, "314157", 10);
     }
+
 
 }
