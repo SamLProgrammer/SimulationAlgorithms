@@ -40,7 +40,6 @@ public class MainWindow extends JFrame{
     
     public void updateRiTableRows(String[][] tableData) {
         mainTabbedPanel.updateRiTableRows(tableData);
-        
     }
 
     private void turnOn() {
@@ -56,7 +55,7 @@ public class MainWindow extends JFrame{
         if (component instanceof Container) {
             Component[] components = ((Container) component).getComponents();
             for (Component child : components) {
-                // System.out.println(child.getClass().getSimpleName());
+                System.out.println(child.getClass().getSimpleName());
                 if (child instanceof Container) {
                     printComponentClassNames(child);
                 }

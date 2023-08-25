@@ -3,9 +3,6 @@ import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Toolkit;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-
 import javax.swing.JFrame;
 
 import org.example.controller.Controller;
@@ -40,7 +37,6 @@ public class MainWindow extends JFrame{
     
     public void updateRiTableRows(String[][] tableData) {
         mainTabbedPanel.updateRiTableRows(tableData);
-        
     }
 
     private void turnOn() {
@@ -48,15 +44,11 @@ public class MainWindow extends JFrame{
         printComponentClassNames(this);
     }
 
-    private MainWindow myInstance() {
-        return this;
-    }
-
     private void printComponentClassNames(Component component) {
         if (component instanceof Container) {
             Component[] components = ((Container) component).getComponents();
             for (Component child : components) {
-                // System.out.println(child.getClass().getSimpleName());
+                System.out.println(child.getClass().getName());
                 if (child instanceof Container) {
                     printComponentClassNames(child);
                 }

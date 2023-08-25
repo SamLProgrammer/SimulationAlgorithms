@@ -21,6 +21,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 import org.example.controller.Controller;
 
@@ -38,7 +39,6 @@ public class RiCommandsPanel extends JPanel {
     private JTextField iTextField;
     private JTextField seedTextField;
     private JTextField nTextField;
-    private JPanel submitButtonPanel;
     private JPanel statsContainer;
     private JPanel statsContainerCongruential;
     private JPanel statsContainerMiddleSquares;
@@ -57,7 +57,7 @@ public class RiCommandsPanel extends JPanel {
         this.controller = controller;
 
         setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
-        submitButtonPanel = new JPanel(new BorderLayout());
+        JPanel submitButtonPanel = new JPanel(new BorderLayout());
         submitGenerationButton = new JButton("Generate");
         submitGenerationButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
         submitGenerationButton.addMouseListener(new MouseAdapter() {
@@ -219,10 +219,9 @@ public class RiCommandsPanel extends JPanel {
             @Override
             public void componentResized(ComponentEvent e) {
                 int margin = (int) (getWidth() * 0.02);
-                int outterMargin = (int) (getWidth() * 0.01);
                 statsContainer.setBorder(BorderFactory.createEmptyBorder(0, margin, 0, margin));
-                algorithmChooserBox.setBorder(BorderFactory.createEmptyBorder(0, outterMargin, 0, outterMargin));
-                submitButtonPanel.setBorder(BorderFactory.createEmptyBorder(0, outterMargin, 0, outterMargin));
+                algorithmChooserBox.setBorder(BorderFactory.createEmptyBorder(0, margin, 0, margin));
+                submitButtonPanel.setBorder(BorderFactory.createEmptyBorder(0, margin, 0, margin));
             }
         });
     }

@@ -21,6 +21,7 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 import org.example.controller.Controller;
 
@@ -219,10 +220,9 @@ public class RiCommandsPanel extends JPanel {
             @Override
             public void componentResized(ComponentEvent e) {
                 int margin = (int) (getWidth() * 0.02);
-                int outterMargin = (int) (getWidth() * 0.01);
                 statsContainer.setBorder(BorderFactory.createEmptyBorder(0, margin, 0, margin));
-                algorithmChooserBox.setBorder(BorderFactory.createEmptyBorder(0, outterMargin, 0, outterMargin));
-                submitButtonPanel.setBorder(BorderFactory.createEmptyBorder(0, outterMargin, 0, outterMargin));
+                algorithmChooserBox.setBorder(BorderFactory.createEmptyBorder(0, margin, 0, margin));
+                submitButtonPanel.setBorder(BorderFactory.createEmptyBorder(0, margin, 0, margin));
             }
         });
     }

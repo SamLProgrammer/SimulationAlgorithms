@@ -40,12 +40,17 @@ public class MainWindow extends JFrame{
     
     public void updateRiTableRows(String[][] tableData) {
         mainTabbedPanel.updateRiTableRows(tableData);
-        
     }
 
     private void turnOn() {
         setVisible(true);
         printComponentClassNames(this);
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                System.out.println("Label resized: " + myInstance().getSize());
+            }
+        });
     }
 
     private MainWindow myInstance() {
@@ -56,7 +61,6 @@ public class MainWindow extends JFrame{
         if (component instanceof Container) {
             Component[] components = ((Container) component).getComponents();
             for (Component child : components) {
-                // System.out.println(child.getClass().getSimpleName());
                 if (child instanceof Container) {
                     printComponentClassNames(child);
                 }

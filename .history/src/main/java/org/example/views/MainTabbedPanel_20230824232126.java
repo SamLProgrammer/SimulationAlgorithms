@@ -32,7 +32,6 @@ public class MainTabbedPanel extends JTabbedPane {
         pokerTestPanel = new PokerTestPanel();
 
         addTab("Generate Ri", riPanel);
-        addTab("Means Test", meansTestPanel);
         addTab("Variance Test", varianceTestPanel);
         addTab("Chi Square Test", chiSquarePanel);
         addTab("Smirnov Test", smirnovTestPanel);

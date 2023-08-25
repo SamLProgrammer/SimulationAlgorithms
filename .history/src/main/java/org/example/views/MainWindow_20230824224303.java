@@ -40,7 +40,6 @@ public class MainWindow extends JFrame{
     
     public void updateRiTableRows(String[][] tableData) {
         mainTabbedPanel.updateRiTableRows(tableData);
-        
     }
 
     private void turnOn() {
