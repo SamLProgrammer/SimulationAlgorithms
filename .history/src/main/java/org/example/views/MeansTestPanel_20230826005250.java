@@ -150,7 +150,6 @@ public class MeansTestPanel extends JPanel{
     private void setAllComponentListeners() {
         setComponentListener();
         setComponentListenerOnAcceptanceRate();
-        setKeyListenerOnAcceptanceRate();
     }
 
     private void setComponentListener() {
@@ -188,16 +187,8 @@ public class MeansTestPanel extends JPanel{
     private void setKeyListenerOnAcceptanceRate()  {
         acceptanceLevelField.addKeyListener(new KeyAdapter() {
             @Override
-            public void keyReleased(KeyEvent e) {
-                int asciiCode = e.getKeyChar();
-                // e.consume();
-                if(!((asciiCode < 48 || asciiCode > 57) && asciiCode != 46 && asciiCode != 44 && asciiCode != 8)) {
-                    if(acceptanceLevelField.getText().length() > 0) {
-                        invokeMeansTest();
-                    }
-                } else {
-                    e.consume();
-                }
+            public void keyPressed(KeyEvent e) {
+                System.out.println(e.getKeyCode());;
             }
         });
     }
@@ -224,14 +215,6 @@ public class MeansTestPanel extends JPanel{
         } else {
             return getJPanelParentComponent(component.getParent());
         }
-    }
-
-    private void invokeMeansTest() {
-        String stringValue = acceptanceLevelField.getText();
-        if(stringValue.charAt(stringValue.length()-1) == '.') {
-            stringValue += '0';
-        }
-        System.out.println(stringValue);
     }
 
 }

@@ -10,8 +10,6 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -150,7 +148,6 @@ public class MeansTestPanel extends JPanel{
     private void setAllComponentListeners() {
         setComponentListener();
         setComponentListenerOnAcceptanceRate();
-        setKeyListenerOnAcceptanceRate();
     }
 
     private void setComponentListener() {
@@ -185,23 +182,6 @@ public class MeansTestPanel extends JPanel{
         });
     }
 
-    private void setKeyListenerOnAcceptanceRate()  {
-        acceptanceLevelField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyReleased(KeyEvent e) {
-                int asciiCode = e.getKeyChar();
-                // e.consume();
-                if(!((asciiCode < 48 || asciiCode > 57) && asciiCode != 46 && asciiCode != 44 && asciiCode != 8)) {
-                    if(acceptanceLevelField.getText().length() > 0) {
-                        invokeMeansTest();
-                    }
-                } else {
-                    e.consume();
-                }
-            }
-        });
-    }
-
     private JPanel getJPanelParentComponent(Component component) {
         if(component == null) {
             return null;
@@ -224,14 +204,6 @@ public class MeansTestPanel extends JPanel{
         } else {
             return getJPanelParentComponent(component.getParent());
         }
-    }
-
-    private void invokeMeansTest() {
-        String stringValue = acceptanceLevelField.getText();
-        if(stringValue.charAt(stringValue.length()-1) == '.') {
-            stringValue += '0';
-        }
-        System.out.println(stringValue);
     }
 
 }

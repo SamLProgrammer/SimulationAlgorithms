@@ -190,13 +190,12 @@ public class MeansTestPanel extends JPanel{
             @Override
             public void keyReleased(KeyEvent e) {
                 int asciiCode = e.getKeyChar();
-                // e.consume();
+                e.consume();
                 if(!((asciiCode < 48 || asciiCode > 57) && asciiCode != 46 && asciiCode != 44 && asciiCode != 8)) {
-                    if(acceptanceLevelField.getText().length() > 0) {
-                        invokeMeansTest();
+                    if(asciiCode != 8) {
+                        acceptanceLevelField.setText(acceptanceLevelField.getText() + e.getKeyChar());
                     }
-                } else {
-                    e.consume();
+                    invokeMeansTest();
                 }
             }
         });
@@ -228,10 +227,12 @@ public class MeansTestPanel extends JPanel{
 
     private void invokeMeansTest() {
         String stringValue = acceptanceLevelField.getText();
+        System.out.println(stringValue);
         if(stringValue.charAt(stringValue.length()-1) == '.') {
             stringValue += '0';
         }
         System.out.println(stringValue);
+        // controller.invokeMeansTest()
     }
 
 }

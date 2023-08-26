@@ -232,6 +232,7 @@ public class MeansTestPanel extends JPanel{
             stringValue += '0';
         }
         System.out.println(stringValue);
+        controller.invokeMeansTest()
     }
 
 }

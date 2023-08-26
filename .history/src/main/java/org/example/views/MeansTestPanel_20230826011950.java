@@ -228,10 +228,12 @@ public class MeansTestPanel extends JPanel{
 
     private void invokeMeansTest() {
         String stringValue = acceptanceLevelField.getText();
+        System.out.println(stringValue);
         if(stringValue.charAt(stringValue.length()-1) == '.') {
             stringValue += '0';
         }
         System.out.println(stringValue);
+        // controller.invokeMeansTest()
     }
 
 }
