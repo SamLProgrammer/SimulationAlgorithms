@@ -38,7 +38,7 @@ public class MeansTestPanel extends JPanel{
     public MeansTestPanel(Controller controller) {
         initProperties();
         initComponents(controller);
-        setAllComponentListeners();
+        setComponentListener();
     }
 
     private void initProperties() {
@@ -68,7 +68,6 @@ public class MeansTestPanel extends JPanel{
         JPanel percentageContainer = new JPanel(new BorderLayout());
         percentageContainer.add(percentageLabel, BorderLayout.WEST);
         percentageContainer.add(acceptanceLevelField);
-        percentageContainer.setName("perC");
 
         // Set background colors for visualization
         RiTable.setBackground(Color.RED);
@@ -145,37 +144,17 @@ public class MeansTestPanel extends JPanel{
         RiTable = riTable;
     }
 
-    private void setAllComponentListeners() {
-        setComponentListener();
-        setComponentListenerOnAcceptanceRate();
-    }
-
     private void setComponentListener() {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 JPanel targetPanel = getJPanelParentComponent(acceptanceLevelField);
-                JPanel parentPanel = getJPanelParentComponent(targetPanel.getParent());
+                JPanel parentPanel = getJPanelParentComponent(targetPanel);
 
                 parentPanel.setBackground(Color.red);
                 int width = (int) (parentPanel.getWidth() * 0.3);
                 int height = (int) targetPanel.getHeight();
-                targetPanel.setMaximumSize(new Dimension(width, height));
-                targetPanel.setMinimumSize(new Dimension(width, height));
-            }
-        });
-    }
 
-    private void setComponentListenerOnAcceptanceRate() {
-        acceptanceLevelField.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                JPanel targetPanel = getJPanelParentComponent(acceptanceLevelField);
-                JPanel parentPanel = getJPanelParentComponent(targetPanel.getParent());
-
-                parentPanel.setBackground(Color.red);
-                int width = (int) (parentPanel.getWidth() * 0.3);
-                int height = (int) targetPanel.getHeight();
                 targetPanel.setMaximumSize(new Dimension(width, height));
                 targetPanel.setMinimumSize(new Dimension(width, height));
             }
@@ -183,7 +162,6 @@ public class MeansTestPanel extends JPanel{
     }
 
     private JPanel getJPanelParentComponent(Component component) {
-        System.out.println(component.getName());
         if(component == null) {
             return null;
         }

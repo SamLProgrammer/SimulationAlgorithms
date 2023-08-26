@@ -92,7 +92,7 @@ public class MeansTestPanel extends JPanel{
         riTableConstraints.weightx = 0.6; // 70% width
         riTableConstraints.weighty = 1.0; // 100% height
         riTableConstraints.fill = GridBagConstraints.BOTH;
-        riTableConstraints.anchor = GridBagConstraints.WEST;
+        // riTableConstraints.anchor = GridBagConstraints.WEST;
         add(RiTable, riTableConstraints);
 
         // GridBagConstraints for parametersPanel

@@ -38,7 +38,7 @@ public class MeansTestPanel extends JPanel{
     public MeansTestPanel(Controller controller) {
         initProperties();
         initComponents(controller);
-        setAllComponentListeners();
+        setComponentListener();
     }
 
     private void initProperties() {
@@ -145,39 +145,22 @@ public class MeansTestPanel extends JPanel{
         RiTable = riTable;
     }
 
-    private void setAllComponentListeners() {
-        setComponentListener();
-        setComponentListenerOnAcceptanceRate();
-    }
-
     private void setComponentListener() {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
                 JPanel targetPanel = getJPanelParentComponent(acceptanceLevelField);
-                JPanel parentPanel = getJPanelParentComponent(targetPanel.getParent());
+                System.out.println(targetPanel.getName() + "x");
+                JPanel parentPanel = getJPanelParentComponent(targetPanel);
+                System.out.println(parentPanel.getName() + "y");
 
-                parentPanel.setBackground(Color.red);
-                int width = (int) (parentPanel.getWidth() * 0.3);
-                int height = (int) targetPanel.getHeight();
-                targetPanel.setMaximumSize(new Dimension(width, height));
-                targetPanel.setMinimumSize(new Dimension(width, height));
-            }
-        });
-    }
-
-    private void setComponentListenerOnAcceptanceRate() {
-        acceptanceLevelField.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                JPanel targetPanel = getJPanelParentComponent(acceptanceLevelField);
-                JPanel parentPanel = getJPanelParentComponent(targetPanel.getParent());
-
-                parentPanel.setBackground(Color.red);
-                int width = (int) (parentPanel.getWidth() * 0.3);
-                int height = (int) targetPanel.getHeight();
-                targetPanel.setMaximumSize(new Dimension(width, height));
-                targetPanel.setMinimumSize(new Dimension(width, height));
+                // parentPanel.setBackground(Color.red);
+                // int width = (int) (parentPanel.getWidth() * 0.3);
+                // int height = (int) targetPanel.getHeight();
+                // // System.out.println(parentPanel.getName());
+                // // System.out.println(parentPanel.getWidth());
+                // targetPanel.setMaximumSize(new Dimension(width, height));
+                // targetPanel.setMinimumSize(new Dimension(width, height));
             }
         });
     }

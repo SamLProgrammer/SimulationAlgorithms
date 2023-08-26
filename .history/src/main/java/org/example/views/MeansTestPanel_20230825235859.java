@@ -4,7 +4,6 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.Insets;
@@ -12,7 +11,6 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 
 import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -38,7 +36,7 @@ public class MeansTestPanel extends JPanel{
     public MeansTestPanel(Controller controller) {
         initProperties();
         initComponents(controller);
-        setAllComponentListeners();
+        setComponentListener();
     }
 
     private void initProperties() {
@@ -59,16 +57,7 @@ public class MeansTestPanel extends JPanel{
         acceptanceLevelLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 
         acceptanceLevelField = new JTextField();
-        acceptanceLevelField.setFont(new Font("Oswald", Font.BOLD, 15));
-
-        JLabel percentageLabel = new JLabel("% ");
-        percentageLabel.setFont(new Font("Oswald", Font.BOLD, 15));
         acceptanceLevelContainer.setName("dude");
-
-        JPanel percentageContainer = new JPanel(new BorderLayout());
-        percentageContainer.add(percentageLabel, BorderLayout.WEST);
-        percentageContainer.add(acceptanceLevelField);
-        percentageContainer.setName("perC");
 
         // Set background colors for visualization
         RiTable.setBackground(Color.RED);
@@ -79,9 +68,8 @@ public class MeansTestPanel extends JPanel{
         JPanel paramsAndResultsPanel = new JPanel(new GridBagLayout());
 
         acceptanceLevelContainer.add(acceptanceLevelLabel);
-        acceptanceLevelContainer.add(Box.createRigidArea(new Dimension(0, 5)));
 
-        acceptanceLevelContainer.add(percentageContainer);
+        acceptanceLevelContainer.add(acceptanceLevelField);
 
         // GridBagConstraints for RiTable
         GridBagConstraints riTableConstraints = new GridBagConstraints();
@@ -145,62 +133,26 @@ public class MeansTestPanel extends JPanel{
         RiTable = riTable;
     }
 
-    private void setAllComponentListeners() {
-        setComponentListener();
-        setComponentListenerOnAcceptanceRate();
-    }
-
     private void setComponentListener() {
         addComponentListener(new ComponentAdapter() {
             @Override
             public void componentResized(ComponentEvent e) {
-                JPanel targetPanel = getJPanelParentComponent(acceptanceLevelField);
-                JPanel parentPanel = getJPanelParentComponent(targetPanel.getParent());
-
-                parentPanel.setBackground(Color.red);
-                int width = (int) (parentPanel.getWidth() * 0.3);
-                int height = (int) targetPanel.getHeight();
-                targetPanel.setMaximumSize(new Dimension(width, height));
-                targetPanel.setMinimumSize(new Dimension(width, height));
-            }
-        });
-    }
-
-    private void setComponentListenerOnAcceptanceRate() {
-        acceptanceLevelField.addComponentListener(new ComponentAdapter() {
-            @Override
-            public void componentResized(ComponentEvent e) {
-                JPanel targetPanel = getJPanelParentComponent(acceptanceLevelField);
-                JPanel parentPanel = getJPanelParentComponent(targetPanel.getParent());
-
-                parentPanel.setBackground(Color.red);
-                int width = (int) (parentPanel.getWidth() * 0.3);
-                int height = (int) targetPanel.getHeight();
-                targetPanel.setMaximumSize(new Dimension(width, height));
-                targetPanel.setMinimumSize(new Dimension(width, height));
+                JPanel parentPanel = getJPanelParentComponent(acceptanceLevelField);
+                int width = (int) (parentPanel.getWidth() * 0.1);
+                System.out.println("=========");
+                System.out.println(parentPanel.getWidth());
+                System.out.println(width);
+                acceptanceLevelField.setMaximumSize(new Dimension(acceptanceLevelField.getHeight(), width));
             }
         });
     }
 
     private JPanel getJPanelParentComponent(Component component) {
-        System.out.println(component.getName());
         if(component == null) {
             return null;
         }
 
         if(component instanceof JPanel) {
-            return (JPanel)component;
-        } else {
-            return getJPanelParentComponent(component.getParent());
-        }
-    }
-
-    private JPanel getJPanelParentComponentByName(Component component, String name) {
-        if(component == null) {
-            return null;
-        }
-
-        if(component instanceof JPanel && component.getName() == name) {
             return (JPanel)component;
         } else {
             return getJPanelParentComponent(component.getParent());

@@ -137,7 +137,7 @@ public class MeansTestPanel extends JPanel{
         paramsAndResultsContainerConstraints.gridheight = 1;
         paramsAndResultsContainerConstraints.weightx = 0.4; // 30% width
         paramsAndResultsContainerConstraints.weighty = 1.0; // 100% height
-        paramsAndResultsContainerConstraints.fill = GridBagConstraints.BOTH;
+        paramsAndResultsContainerConstraints.fill = GridBagConstraints.NONE;
         add(paramsAndResultsPanel, paramsAndResultsContainerConstraints);
     }
 
