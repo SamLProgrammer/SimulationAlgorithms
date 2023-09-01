@@ -129,7 +129,7 @@ public class MeansTestPanel extends JPanel {
         calculatedResultsConstraint.gridwidth = 1;
         calculatedResultsConstraint.gridheight = 1;
         calculatedResultsConstraint.weightx = 0.25;
-        calculatedResultsConstraint.weighty = 0.15;
+        calculatedResultsConstraint.weighty = 0.25;
 
         JLabel alphaLabel = new JLabel("\u03B1", SwingConstants.CENTER);
         JPanel alphaContainer = new JPanel(new BorderLayout());
@@ -146,8 +146,7 @@ public class MeansTestPanel extends JPanel {
         calculatedResultsConstraint2.gridwidth = 1;
         calculatedResultsConstraint2.gridheight = 1;
         calculatedResultsConstraint2.weightx = 0.25;
-        calculatedResultsConstraint2.weighty = 0.15;
-
+        calculatedResultsConstraint2.weighty = 0.25;
         JLabel halfAlphaLabel = new JLabel("\u03B1 / 2", SwingConstants.CENTER);
         JPanel halfAlphaContainer = new JPanel(new BorderLayout());
         halfAlfaValueArea = new JTextArea(1, 5);
@@ -161,9 +160,9 @@ public class MeansTestPanel extends JPanel {
         calculatedResultsConstraint3.gridx = 0;
         calculatedResultsConstraint3.gridy = 2;
         calculatedResultsConstraint3.gridwidth = 1;
-        calculatedResultsConstraint3.gridheight = 1;
+        calculatedResultsConstraint3.gridheight = 2;
         calculatedResultsConstraint3.weightx = 0.25;
-        calculatedResultsConstraint3.weighty = 0.15;
+        calculatedResultsConstraint3.weighty = 0.25;
 
         JLabel inverseHalfAlphaLabel = new JLabel("1 - \u03B1 / 2", SwingConstants.CENTER);
         JPanel inverseHalfAlphaContainer = new JPanel(new BorderLayout());
@@ -180,7 +179,7 @@ public class MeansTestPanel extends JPanel {
         calculatedResultsConstraint4.gridwidth = 1;
         calculatedResultsConstraint4.gridheight = 1;
         calculatedResultsConstraint4.weightx = 0.25;
-        calculatedResultsConstraint4.weighty = 0.15;
+        calculatedResultsConstraint4.weighty = 0.25;
 
         JLabel zetLabel = new JLabel("\u03B6", SwingConstants.CENTER);
         JPanel zetValueContainer = new JPanel(new BorderLayout());
@@ -275,6 +274,7 @@ public class MeansTestPanel extends JPanel {
                             Double value = entry.getValue();
                             JTextArea valueHolderComponent = (JTextArea) findChildByName(key);
                             if (valueHolderComponent != null) {
+                                System.out.println("key: " + key + ", value: " + value);
                                 valueHolderComponent.setText("  " + String.valueOf(value));
                                 valueHolderComponent.setEditable(false);
                             }

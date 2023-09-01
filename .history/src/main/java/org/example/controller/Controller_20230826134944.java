@@ -1,7 +1,6 @@
 package org.example.controller;
 
 import java.util.ArrayList;
-import java.util.Map;
 
 import org.example.models.RandomAlgorithms;
 import org.example.models.StatisticFunctions;
@@ -30,6 +29,7 @@ public class Controller {
         ArrayList<Double> randomsList = randomAlgorithms.generateWithMiddleSquare(iterations, seed);
         int rowsNumber = randomsList.size() / columns;
         rowsNumber = (randomsList.size() % columns == 0) ? rowsNumber : rowsNumber + 1;
+        System.out.println(rowsNumber);
         String[][] tableData = new String[rowsNumber][columns];
 
         for(int i = 0; i < randomsList.size(); i++) {
@@ -42,6 +42,7 @@ public class Controller {
         ArrayList<Double> randomsList = randomAlgorithms.generateWithCongruent(x0, k, c, g, iterations, type);
         int rowsNumber = randomsList.size() / columns;
         rowsNumber = (randomsList.size() % columns == 0) ? rowsNumber : rowsNumber + 1;
+        System.out.println(rowsNumber);
         String[][] tableData = new String[rowsNumber][columns];
 
         for(int i = 0; i < randomsList.size(); i++) {
@@ -50,8 +51,8 @@ public class Controller {
         mainWindow.updateRiTableRows(tableData);
     }
 
-    public Map<String, Double> invokeMeansTest(double acceptanceRate) {
-        return tests.invokeMeansTest(acceptanceRate);
+    public void invokeMeansTest(double acceptanceRate) {
+        tests.invokeMeansTest(acceptanceRate);
     }
 
 }

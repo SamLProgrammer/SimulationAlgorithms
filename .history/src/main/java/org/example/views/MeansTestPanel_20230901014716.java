@@ -275,6 +275,7 @@ public class MeansTestPanel extends JPanel {
                             Double value = entry.getValue();
                             JTextArea valueHolderComponent = (JTextArea) findChildByName(key);
                             if (valueHolderComponent != null) {
+                                System.out.println("key: " + key + ", value: " + value);
                                 valueHolderComponent.setText("  " + String.valueOf(value));
                                 valueHolderComponent.setEditable(false);
                             }

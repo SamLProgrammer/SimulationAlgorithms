@@ -49,10 +49,14 @@ public class MeansTest {
 
     private Double formatDouble(double value) {
         String valueString = String.valueOf(value);
-        String decimalSide = valueString.split("\\.")[1];
+        System.out.println("valueString");
+        System.out.println(valueString);
+        String[] decimalSide = valueString.split(".");
+        System.out.println("decimalSide[1]");
+        System.out.println(decimalSide[1]);
         int remainingDecimals = 0;
-        if(decimalSide.length() > 5) {
-            remainingDecimals = decimalSide.length() - 5;
+        if(decimalSide[1].length() > 5) {
+            remainingDecimals = decimalSide[1].length() - 5;
         }
         return Double.parseDouble(valueString.substring(0, valueString.length()-remainingDecimals));
     }

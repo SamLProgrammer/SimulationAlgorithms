@@ -199,7 +199,7 @@ public class MeansTestPanel extends JPanel {
         calculatedResultsConstraint5.gridwidth = 1;
         calculatedResultsConstraint5.gridheight = 2;
         calculatedResultsConstraint5.weightx = 0.25;
-        calculatedResultsConstraint5.weighty = 0.25;
+        calculatedResultsConstraint5.weighty = 0.15;
 
         JLabel leftLimitLabel = new JLabel("1 - \u03B1 / 2", SwingConstants.CENTER);
         JPanel leftLimitContainer = new JPanel(new BorderLayout());
@@ -216,7 +216,7 @@ public class MeansTestPanel extends JPanel {
         calculatedResultsConstraint6.gridwidth = 1;
         calculatedResultsConstraint6.gridheight = 1;
         calculatedResultsConstraint6.weightx = 0.25;
-        calculatedResultsConstraint6.weighty = 0.25;
+        calculatedResultsConstraint6.weighty = 0.15;
 
         JLabel rightLimitLabel = new JLabel("\u03B6", SwingConstants.CENTER);
         JPanel rightLimitContainer = new JPanel(new BorderLayout());
@@ -275,6 +275,7 @@ public class MeansTestPanel extends JPanel {
                             Double value = entry.getValue();
                             JTextArea valueHolderComponent = (JTextArea) findChildByName(key);
                             if (valueHolderComponent != null) {
+                                System.out.println("key: " + key + ", value: " + value);
                                 valueHolderComponent.setText("  " + String.valueOf(value));
                                 valueHolderComponent.setEditable(false);
                             }

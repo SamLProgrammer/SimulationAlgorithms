@@ -22,7 +22,7 @@ public class StatisticFunctions {
 
         try {
             sheetsService = SheetsServiceUtil.getSheetsService();
-            updateCell(sheetsService, spreadsheetId, row, column, "=ROUND(NORM.S.INV(" + String.valueOf(baseNumber).replace('.', ',') + "); 5)");
+            updateCell(sheetsService, spreadsheetId, row, column, "=ROUND(NORM.S.INV(" + String.valueOf(baseNumber).replace('.', ',') + "0.975), 5)");
             calculatedResult = getCellValue(sheetsService, spreadsheetId, range);
         } catch (IOException e) {
             // TODO Auto-generated catch block
