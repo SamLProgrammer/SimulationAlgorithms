@@ -25,8 +25,7 @@ public class MeansTest {
 
     public Map<String, Double> executeTest(double acceptanceRate , int n, ArrayList<Double> randomsList) {
         this.acceptanceRate = acceptanceRate;
-        double average = calculateAverage(randomsList);
-        double result = calculateVariables(n, average);
+        double result = calculateVariables(n, calculateAverage(randomsList));
         Map<String, Double> statsMap = new HashMap<String, Double>();
         statsMap.put("alphaRate", alphaRate);
         statsMap.put("halfAlphaRate", halfAlphaRate);
@@ -34,7 +33,6 @@ public class MeansTest {
         statsMap.put("zet", zet);
         statsMap.put("leftLimit", leftLimit);
         statsMap.put("rightLimit", rightLimit);
-        statsMap.put("average", average);
         statsMap.put("result", result);
         return statsMap;
     }

@@ -53,7 +53,7 @@ public class Controller {
     }
 
     public Map<String, Double> invokeMeansTest(double acceptanceRate) {
-        return tests.invokeMeansTest(acceptanceRate, randomAlgorithms.getN(), randomAlgorithms.getCurrentRandomList());
+        return tests.invokeMeansTest(acceptanceRate, randomAlgorithms.getN());
     }
 
 }

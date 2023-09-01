@@ -17,19 +17,15 @@ public class RandomAlgorithms {
         congruent = new Congruent();
     }
 
-    public void generateWithMiddleSquare(int iterations, String seed) {
-        currentRandomList = middleSquare.fecadeStartSquaresGeneration(iterations, seed);
+    public ArrayList<Double> generateWithMiddleSquare(int iterations, String seed) {
+        return middleSquare.fecadeStartSquaresGeneration(iterations, seed);
     }
 
-    public void generateWithCongruent(int x0, int k, int c, int g, int iterations, char type) {
-        currentRandomList = congruent.fecadeStartCongruentGeneration(x0, k, c, g, iterations, type);
+    public ArrayList<Double> generateWithCongruent(int x0, int k, int c, int g, int iterations, char type) {
+        return congruent.fecadeStartCongruentGeneration(x0, k, c, g, iterations, type);
     }
 
     public int getN() {
         return currentRandomList.size();
-    }
-
-    public ArrayList<Double> getCurrentRandomList() {
-        return currentRandomList;
     }
 }

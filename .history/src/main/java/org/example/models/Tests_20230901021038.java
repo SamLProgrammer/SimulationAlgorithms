@@ -1,6 +1,5 @@
 package org.example.models;
 
-import java.util.ArrayList;
 import java.util.Map;
 
 public class Tests {
@@ -20,7 +19,7 @@ public class Tests {
         meansTest = new MeansTest(statisticFunctions);
     }
 
-    public Map<String, Double> invokeMeansTest(double acceptanceRate, int n, ArrayList<Double> randomsList) {
-        return meansTest.executeTest(acceptanceRate, n, randomsList);
+    public Map<String, Double> invokeMeansTest(double acceptanceRate, int n) {
+        return meansTest.executeTest(acceptanceRate, n);
     }
 }

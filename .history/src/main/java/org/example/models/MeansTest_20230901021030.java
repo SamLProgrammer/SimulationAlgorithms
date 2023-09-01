@@ -1,6 +1,5 @@
 package org.example.models;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -23,10 +22,9 @@ public class MeansTest {
         this.statisticFunctions = statisticFunctions;
     }
 
-    public Map<String, Double> executeTest(double acceptanceRate , int n, ArrayList<Double> randomsList) {
+    public Map<String, Double> executeTest(double acceptanceRate , int n) {
         this.acceptanceRate = acceptanceRate;
-        double average = calculateAverage(randomsList);
-        double result = calculateVariables(n, average);
+        calculateVariables(n);
         Map<String, Double> statsMap = new HashMap<String, Double>();
         statsMap.put("alphaRate", alphaRate);
         statsMap.put("halfAlphaRate", halfAlphaRate);
@@ -34,21 +32,10 @@ public class MeansTest {
         statsMap.put("zet", zet);
         statsMap.put("leftLimit", leftLimit);
         statsMap.put("rightLimit", rightLimit);
-        statsMap.put("average", average);
-        statsMap.put("result", result);
         return statsMap;
     }
 
-    private double calculateAverage(ArrayList<Double> randomsList) {
-        double average = 0;
-        for(double random : randomsList) {
-            average += random;
-        }
-
-        return average / randomsList.size();
-    }
-
-    private double calculateVariables(int n, double average) {
+    private void calculateVariables(int n) {
         alphaRate = 100 - acceptanceRate;
         halfAlphaRate = alphaRate/200;
         relativeAlphaRate = 1.0 - halfAlphaRate;
@@ -57,7 +44,6 @@ public class MeansTest {
         rightLimit = MEAN + ( zet * ( 1 / Math.sqrt( 12 * n ) ) );
         rightLimit = formatDouble(rightLimit);
         leftLimit = formatDouble(leftLimit);
-        return (leftLimit <= average && rightLimit >= average) ? 1.0 : 0.0;
     }
 
     private Double formatDouble(double value) {

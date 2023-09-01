@@ -27,8 +27,7 @@ public class Controller {
     }
 
     public void generateWithMiddleSquare(int iterations, String seed, int columns) {
-        randomAlgorithms.generateWithMiddleSquare(iterations, seed);
-        ArrayList<Double> randomsList = randomAlgorithms.getCurrentRandomList();
+        ArrayList<Double> randomsList = randomAlgorithms.generateWithMiddleSquare(iterations, seed);
         int rowsNumber = randomsList.size() / columns;
         rowsNumber = (randomsList.size() % columns == 0) ? rowsNumber : rowsNumber + 1;
         String[][] tableData = new String[rowsNumber][columns];
@@ -40,8 +39,7 @@ public class Controller {
     }
 
     public void generateWithCongruent(int x0, int k, int c, int g, int iterations, char type, int columns) {
-        randomAlgorithms.generateWithCongruent(x0, k, c, g, iterations, type);
-        ArrayList<Double> randomsList = randomAlgorithms.getCurrentRandomList();
+        ArrayList<Double> randomsList = randomAlgorithms.generateWithCongruent(x0, k, c, g, iterations, type);
         int rowsNumber = randomsList.size() / columns;
         rowsNumber = (randomsList.size() % columns == 0) ? rowsNumber : rowsNumber + 1;
         String[][] tableData = new String[rowsNumber][columns];
@@ -52,8 +50,8 @@ public class Controller {
         mainWindow.updateRiTableRows(tableData);
     }
 
-    public Map<String, Double> invokeMeansTest(double acceptanceRate) {
-        return tests.invokeMeansTest(acceptanceRate, randomAlgorithms.getN(), randomAlgorithms.getCurrentRandomList());
+    public Map<String, Double> invokeMeansTest(double acceptanceRate, int n) {
+        return tests.invokeMeansTest(acceptanceRate);
     }
 
 }
