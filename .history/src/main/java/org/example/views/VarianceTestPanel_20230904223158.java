@@ -20,7 +20,8 @@ import javax.swing.SwingConstants;
 
 import org.example.controller.Controller;
 
-public class MeansTestPanel extends JPanel {
+public class VarianceTestPanel extends JPanel {
+
     private TablePanel RiTable;
     private JPanel parametersPanel;
     private JPanel resultPanel;
@@ -28,7 +29,8 @@ public class MeansTestPanel extends JPanel {
     private JTextArea alphaValueArea;
     private JTextArea halfAlfaValueArea;
     private JTextArea inverseHalfAlfaValueArea;
-    private JTextArea zetValueArea;
+    private JTextArea halfAlphaXValueArea;
+    private JTextArea inverseHalfAlphaXValueArea;
     private JTextArea leftLimitArea;
     private JTextArea rightLimitArea;
     private JTextArea averagePane; 
@@ -36,7 +38,7 @@ public class MeansTestPanel extends JPanel {
 
     private Controller controller;
 
-    public MeansTestPanel(Controller controller) {
+    public VarianceTestPanel(Controller controller) {
         initProperties();
         initComponents(controller);
         setAllComponentListeners();
@@ -50,7 +52,9 @@ public class MeansTestPanel extends JPanel {
     private void initComponents(Controller controller) {
         this.controller = controller;
 
-
+        double weightY = 1.0/7;
+        System.out.println("weightY");
+        System.out.println(weightY);
         RiTable = new TablePanel();
         parametersPanel = new JPanel(new GridBagLayout());
         resultPanel = new JPanel(new GridBagLayout());
@@ -133,7 +137,7 @@ public class MeansTestPanel extends JPanel {
         textFieldConstraints.gridwidth = 2;
         textFieldConstraints.gridheight = 2;
         textFieldConstraints.weightx = 0.5; 
-        textFieldConstraints.weighty = 0.25;
+        textFieldConstraints.weighty = weightY;
         textFieldConstraints.fill = GridBagConstraints.CENTER;
         textFieldConstraints.anchor = GridBagConstraints.NORTH; 
 
@@ -145,7 +149,7 @@ public class MeansTestPanel extends JPanel {
         calculatedResultsConstraint.gridwidth = 1;
         calculatedResultsConstraint.gridheight = 1;
         calculatedResultsConstraint.weightx = 0.25;
-        calculatedResultsConstraint.weighty = 0.15;
+        calculatedResultsConstraint.weighty = weightY;
 
         JLabel alphaLabel = new JLabel("\u03B1", SwingConstants.CENTER);
         JPanel alphaContainer = new JPanel(new BorderLayout());
@@ -162,7 +166,7 @@ public class MeansTestPanel extends JPanel {
         calculatedResultsConstraint2.gridwidth = 1;
         calculatedResultsConstraint2.gridheight = 1;
         calculatedResultsConstraint2.weightx = 0.25;
-        calculatedResultsConstraint2.weighty = 0.15;
+        calculatedResultsConstraint2.weighty = weightY;
 
         JLabel halfAlphaLabel = new JLabel("\u03B1 / 2", SwingConstants.CENTER);
         JPanel halfAlphaContainer = new JPanel(new BorderLayout());
@@ -179,7 +183,7 @@ public class MeansTestPanel extends JPanel {
         calculatedResultsConstraint3.gridwidth = 1;
         calculatedResultsConstraint3.gridheight = 1;
         calculatedResultsConstraint3.weightx = 0.25;
-        calculatedResultsConstraint3.weighty = 0.15;
+        calculatedResultsConstraint3.weighty = weightY;
 
         JLabel inverseHalfAlphaLabel = new JLabel("1 - \u03B1 / 2", SwingConstants.CENTER);
         JPanel inverseHalfAlphaContainer = new JPanel(new BorderLayout());
@@ -190,41 +194,24 @@ public class MeansTestPanel extends JPanel {
         inverseHalfAlphaContainer.add(inverseHalfAlfaValueArea);
         parametersPanel.add(inverseHalfAlphaContainer, calculatedResultsConstraint3);
 
-        GridBagConstraints calculatedResultsConstraint4 = new GridBagConstraints();
-        calculatedResultsConstraint4.gridx = 1;
-        calculatedResultsConstraint4.gridy = 2;
-        calculatedResultsConstraint4.gridwidth = 1;
-        calculatedResultsConstraint4.gridheight = 1;
-        calculatedResultsConstraint4.weightx = 0.25;
-        calculatedResultsConstraint4.weighty = 0.15;
-
-        JLabel zetLabel = new JLabel("\u03B6", SwingConstants.CENTER);
-        JPanel zetValueContainer = new JPanel(new BorderLayout());
-        zetValueArea = new JTextArea(1, 5);
-        zetValueArea.setName("zet");
-        setStatsAreaProperties(zetValueArea);
-        zetValueContainer.add(zetLabel, BorderLayout.WEST);
-        zetValueContainer.add(zetValueArea);
-        parametersPanel.add(zetValueContainer, calculatedResultsConstraint4);
-
         // =========================================================================================
 
-        GridBagConstraints calculatedResultsConstraint5 = new GridBagConstraints();
-        calculatedResultsConstraint5.gridx = 0;
-        calculatedResultsConstraint5.gridy = 3;
-        calculatedResultsConstraint5.gridwidth = 1;
-        calculatedResultsConstraint5.gridheight = 2;
-        calculatedResultsConstraint5.weightx = 0.25;
-        calculatedResultsConstraint5.weighty = 0.25;
+        // GridBagConstraints calculatedResultsConstraint5 = new GridBagConstraints();
+        // calculatedResultsConstraint5.gridx = 0;
+        // calculatedResultsConstraint5.gridy = 3;
+        // calculatedResultsConstraint5.gridwidth = 1;
+        // calculatedResultsConstraint5.gridheight = 2;
+        // calculatedResultsConstraint5.weightx = 0.25;
+        // calculatedResultsConstraint5.weighty = weightY;
 
-        JLabel leftLimitLabel = new JLabel("L.L.", SwingConstants.CENTER);
-        JPanel leftLimitContainer = new JPanel(new BorderLayout());
-        leftLimitArea = new JTextArea(1, 5);
-        leftLimitArea.setName("leftLimit");
-        setStatsAreaProperties(leftLimitArea);
-        leftLimitContainer.add(leftLimitLabel, BorderLayout.WEST);
-        leftLimitContainer.add(leftLimitArea);
-        parametersPanel.add(leftLimitContainer, calculatedResultsConstraint5);
+        // JLabel leftLimitLabel = new JLabel("L.L.", SwingConstants.CENTER);
+        // JPanel leftLimitContainer = new JPanel(new BorderLayout());
+        // leftLimitArea = new JTextArea(1, 5);
+        // leftLimitArea.setName("leftLimit");
+        // setStatsAreaProperties(leftLimitArea);
+        // leftLimitContainer.add(leftLimitLabel, BorderLayout.WEST);
+        // leftLimitContainer.add(leftLimitArea);
+        // parametersPanel.add(leftLimitContainer, calculatedResultsConstraint5);
 
         GridBagConstraints calculatedResultsConstraint6 = new GridBagConstraints();
         calculatedResultsConstraint6.gridx = 1;
@@ -232,16 +219,51 @@ public class MeansTestPanel extends JPanel {
         calculatedResultsConstraint6.gridwidth = 1;
         calculatedResultsConstraint6.gridheight = 1;
         calculatedResultsConstraint6.weightx = 0.25;
-        calculatedResultsConstraint6.weighty = 0.25;
+        calculatedResultsConstraint6.weighty = weightY;
 
-        JLabel rightLimitLabel = new JLabel("R.L.", SwingConstants.CENTER);
-        JPanel rightLimitContainer = new JPanel(new BorderLayout());
-        rightLimitArea = new JTextArea(1, 5);
-        rightLimitArea.setName("rightLimit");
-        setStatsAreaProperties(rightLimitArea);
-        rightLimitContainer.add(rightLimitLabel, BorderLayout.WEST);
-        rightLimitContainer.add(rightLimitArea);
-        parametersPanel.add(rightLimitContainer, calculatedResultsConstraint6);
+        JLabel halfAlphaXValueAreaLabel = new JLabel("H.A.", SwingConstants.CENTER);
+        JPanel halfAlphaXContainer = new JPanel(new BorderLayout());
+        halfAlphaXValueArea = new JTextArea(1, 5);
+        halfAlphaXValueArea.setName("halfAlphaX");
+        setStatsAreaProperties(halfAlphaXValueArea);
+        halfAlphaXContainer.add(halfAlphaXValueAreaLabel, BorderLayout.WEST);
+        halfAlphaXContainer.add(halfAlphaXValueArea);
+        
+        parametersPanel.add(halfAlphaXContainer, calculatedResultsConstraint6);
+
+        GridBagConstraints calculatedResultsConstraint7 = new GridBagConstraints();
+        calculatedResultsConstraint7.gridx = 0;
+        calculatedResultsConstraint7.gridy = 4;
+        calculatedResultsConstraint7.gridwidth = 1;
+        calculatedResultsConstraint7.gridheight = 2;
+        calculatedResultsConstraint7.weightx = 0.25;
+        calculatedResultsConstraint7.weighty = weightY;
+
+        // JLabel rightLimitLabel = new JLabel("R.L.", SwingConstants.CENTER);
+        // JPanel rightLimitContainer = new JPanel(new BorderLayout());
+        // rightLimitArea = new JTextArea(1, 5);
+        // rightLimitArea.setName("rightLimit");
+        // setStatsAreaProperties(rightLimitArea);
+        // rightLimitContainer.add(rightLimitLabel, BorderLayout.WEST);
+        // rightLimitContainer.add(rightLimitArea);
+        // parametersPanel.add(rightLimitContainer, calculatedResultsConstraint7);
+
+        // GridBagConstraints calculatedResultsConstraint8 = new GridBagConstraints();
+        // calculatedResultsConstraint8.gridx = 1;
+        // calculatedResultsConstraint8.gridy = 4;
+        // calculatedResultsConstraint8.gridwidth = 1;
+        // calculatedResultsConstraint8.gridheight = 1;
+        // calculatedResultsConstraint8.weightx = 0.25;
+        // calculatedResultsConstraint8.weighty = weightY;
+
+        // JLabel inverseHalfAlphaXLabel = new JLabel("I.A.", SwingConstants.CENTER);
+        // JPanel inverseHalfAlphaXContainer = new JPanel(new BorderLayout());
+        // inverseHalfAlphaXValueArea = new JTextArea(1, 5);
+        // inverseHalfAlphaXValueArea.setName("inverseHalfAlphaX");
+        // setStatsAreaProperties(inverseHalfAlphaXValueArea);
+        // inverseHalfAlphaXContainer.add(inverseHalfAlphaXLabel, BorderLayout.WEST);
+        // inverseHalfAlphaXContainer.add(inverseHalfAlphaXValueArea);
+        // parametersPanel.add(inverseHalfAlphaXContainer, calculatedResultsConstraint8);
 
         // =========================================================================================
 
@@ -263,7 +285,7 @@ public class MeansTestPanel extends JPanel {
         paramsAndResultsContainerConstraints.gridwidth = 1;
         paramsAndResultsContainerConstraints.gridheight = 1;
         paramsAndResultsContainerConstraints.weightx = 0.4;
-        paramsAndResultsContainerConstraints.weighty = 1.0;
+        paramsAndResultsContainerConstraints.weighty = 0.15;
         paramsAndResultsContainerConstraints.fill = GridBagConstraints.BOTH;
         add(paramsAndResultsPanel, paramsAndResultsContainerConstraints);
     }
@@ -283,19 +305,8 @@ public class MeansTestPanel extends JPanel {
                 int asciiCode = e.getKeyChar();
                 if (!((asciiCode < 48 || asciiCode > 57) && asciiCode != 46 && asciiCode != 44 && asciiCode != 8)) {
                     if (acceptanceLevelField.getText().length() > 0) {
-                        Map<String, Double> statsMap = invokeMeansTest();
-                        for (Map.Entry<String, Double> entry : statsMap.entrySet()) {
-                            String key = entry.getKey();
-                            Double value = entry.getValue();
-                            JTextArea valueHolderComponent = (JTextArea) findChildByName(key);
-                            if (valueHolderComponent != null) {
-
-                                valueHolderComponent.setText((!key.equals("result")) ? "  " + String.valueOf(value)
-                                        : (value == 1.0) ? "Passed" : "Failed");
-                                valueHolderComponent.setEditable(false);
-
-                            }
-                        }
+                        Map<String, Double> statsMap = invokeVarianceTest();
+                        System.out.println(statsMap);
                     }
                 } else {
                     e.consume();
@@ -316,12 +327,12 @@ public class MeansTestPanel extends JPanel {
         }
     }
 
-    private Map<String, Double> invokeMeansTest() {
+    private Map<String, Double> invokeVarianceTest() {
         String stringValue = acceptanceLevelField.getText();
         if (stringValue.charAt(stringValue.length() - 1) == '.') {
             stringValue += '0';
         }
-        return controller.invokeMeansTest(Double.parseDouble(stringValue));
+        return controller.invokeVarianceTest(Double.parseDouble(stringValue));
     }
 
     private JComponent findChildByName(String name) {
@@ -345,7 +356,7 @@ public class MeansTestPanel extends JPanel {
         return null;
     }
 
-    private MeansTestPanel myInstance() {
+    private VarianceTestPanel myInstance() {
         return this;
     }
 

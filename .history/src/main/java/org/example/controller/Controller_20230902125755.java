@@ -52,9 +52,9 @@ public class Controller {
         mainWindow.updateRiTableRows(tableData);
     }
 
-    public Map<String, Double> invokeVarianceTest(double acceptanceRate) {
-        System.out.println("Acceptance Rate: " + acceptanceRate);
-        return tests.invokeVarianceTest(acceptanceRate, randomAlgorithms.getCurrentRandomList());
+    public Map<String, Double> invokeVarianceTest(double accetanceRate) {
+        System.out.println(tests.invokeVarianceTest(accetanceRate, randomAlgorithms.getCurrentRandomList()));
+        return tests.invokeVarianceTest(accetanceRate, randomAlgorithms.getCurrentRandomList());
     }
 
     public Map<String, Double> invokeMeansTest(double acceptanceRate) {

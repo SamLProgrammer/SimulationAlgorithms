@@ -20,7 +20,8 @@ import javax.swing.SwingConstants;
 
 import org.example.controller.Controller;
 
-public class MeansTestPanel extends JPanel {
+public class VarianceTestPanel extends JPanel {
+
     private TablePanel RiTable;
     private JPanel parametersPanel;
     private JPanel resultPanel;
@@ -36,7 +37,7 @@ public class MeansTestPanel extends JPanel {
 
     private Controller controller;
 
-    public MeansTestPanel(Controller controller) {
+    public VarianceTestPanel(Controller controller) {
         initProperties();
         initComponents(controller);
         setAllComponentListeners();
@@ -241,7 +242,41 @@ public class MeansTestPanel extends JPanel {
         setStatsAreaProperties(rightLimitArea);
         rightLimitContainer.add(rightLimitLabel, BorderLayout.WEST);
         rightLimitContainer.add(rightLimitArea);
-        parametersPanel.add(rightLimitContainer, calculatedResultsConstraint6);
+        parametersPanel.add(rightLimitContainer, calculatedResultsConstraint8);
+
+        GridBagConstraints calculatedResultsConstraint7 = new GridBagConstraints();
+        calculatedResultsConstraint7.gridx = 0;
+        calculatedResultsConstraint7.gridy = 3;
+        calculatedResultsConstraint7.gridwidth = 1;
+        calculatedResultsConstraint7.gridheight = 2;
+        calculatedResultsConstraint7.weightx = 0.25;
+        calculatedResultsConstraint7.weighty = 0.25;
+
+        JLabel leftLimitLabel = new JLabel("L.L.", SwingConstants.CENTER);
+        JPanel leftLimitContainer = new JPanel(new BorderLayout());
+        leftLimitArea = new JTextArea(1, 5);
+        leftLimitArea.setName("leftLimit");
+        setStatsAreaProperties(leftLimitArea);
+        leftLimitContainer.add(leftLimitLabel, BorderLayout.WEST);
+        leftLimitContainer.add(leftLimitArea);
+        parametersPanel.add(leftLimitContainer, calculatedResultsConstraint7);
+
+        GridBagConstraints calculatedResultsConstraint8 = new GridBagConstraints();
+        calculatedResultsConstraint8.gridx = 1;
+        calculatedResultsConstraint8.gridy = 3;
+        calculatedResultsConstraint8.gridwidth = 1;
+        calculatedResultsConstraint8.gridheight = 1;
+        calculatedResultsConstraint8.weightx = 0.25;
+        calculatedResultsConstraint8.weighty = 0.25;
+
+        JLabel rightLimitLabel = new JLabel("R.L.", SwingConstants.CENTER);
+        JPanel rightLimitContainer = new JPanel(new BorderLayout());
+        rightLimitArea = new JTextArea(1, 5);
+        rightLimitArea.setName("rightLimit");
+        setStatsAreaProperties(rightLimitArea);
+        rightLimitContainer.add(rightLimitLabel, BorderLayout.WEST);
+        rightLimitContainer.add(rightLimitArea);
+        parametersPanel.add(rightLimitContainer, calculatedResultsConstraint8);
 
         // =========================================================================================
 
@@ -283,19 +318,8 @@ public class MeansTestPanel extends JPanel {
                 int asciiCode = e.getKeyChar();
                 if (!((asciiCode < 48 || asciiCode > 57) && asciiCode != 46 && asciiCode != 44 && asciiCode != 8)) {
                     if (acceptanceLevelField.getText().length() > 0) {
-                        Map<String, Double> statsMap = invokeMeansTest();
-                        for (Map.Entry<String, Double> entry : statsMap.entrySet()) {
-                            String key = entry.getKey();
-                            Double value = entry.getValue();
-                            JTextArea valueHolderComponent = (JTextArea) findChildByName(key);
-                            if (valueHolderComponent != null) {
-
-                                valueHolderComponent.setText((!key.equals("result")) ? "  " + String.valueOf(value)
-                                        : (value == 1.0) ? "Passed" : "Failed");
-                                valueHolderComponent.setEditable(false);
-
-                            }
-                        }
+                        Map<String, Double> statsMap = invokeVarianceTest();
+                        System.out.println(statsMap);
                     }
                 } else {
                     e.consume();
@@ -316,12 +340,12 @@ public class MeansTestPanel extends JPanel {
         }
     }
 
-    private Map<String, Double> invokeMeansTest() {
+    private Map<String, Double> invokeVarianceTest() {
         String stringValue = acceptanceLevelField.getText();
         if (stringValue.charAt(stringValue.length() - 1) == '.') {
             stringValue += '0';
         }
-        return controller.invokeMeansTest(Double.parseDouble(stringValue));
+        return controller.invokeVarianceTest(Double.parseDouble(stringValue));
     }
 
     private JComponent findChildByName(String name) {
@@ -345,7 +369,7 @@ public class MeansTestPanel extends JPanel {
         return null;
     }
 
-    private MeansTestPanel myInstance() {
+    private VarianceTestPanel myInstance() {
         return this;
     }
 

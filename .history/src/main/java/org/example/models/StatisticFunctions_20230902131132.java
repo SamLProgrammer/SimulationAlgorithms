@@ -38,7 +38,7 @@ public class StatisticFunctions {
     public String getCHISSQInv(double halfAlpha, double n) {
         Sheets sheetsService;
         String spreadsheetId = "13ZBZcbLJuyOdMOftAW7Q1CONDQO05f-q3RSZ9qJdGFQ";
-        String range = "Sheet1!C2";
+        String range = "Sheet1!C1";
 
         int row = 2;
         int column = 3;

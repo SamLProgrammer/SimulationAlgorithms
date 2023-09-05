@@ -38,7 +38,7 @@ public class StatisticFunctions {
     public String getCHISSQInv(double halfAlpha, double n) {
         Sheets sheetsService;
         String spreadsheetId = "13ZBZcbLJuyOdMOftAW7Q1CONDQO05f-q3RSZ9qJdGFQ";
-        String range = "Sheet1!C2";
+        String range = "Sheet1!D1";
 
         int row = 2;
         int column = 3;
@@ -47,8 +47,8 @@ public class StatisticFunctions {
         try {
             sheetsService = SheetsServiceUtil.getSheetsService();
             updateCell(sheetsService, spreadsheetId, row, column, "=ROUND(CHISQ.INV.RT(" + 
-            String.valueOf(halfAlpha).replace('.', ',') + "; " + 
-            String.valueOf(n).replace('.', ',') + "); 5)");
+            String.valueOf(halfAlpha).replace(',', '.') + "; " + 
+            String.valueOf(n).replace(',', '.') + "); 5)");
             calculatedResult = getCellValue(sheetsService, spreadsheetId, range);
         } catch (IOException e) {
             // TODO Auto-generated catch block

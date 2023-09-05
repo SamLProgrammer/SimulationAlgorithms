@@ -20,7 +20,7 @@ import javax.swing.SwingConstants;
 
 import org.example.controller.Controller;
 
-public class MeansTestPanel extends JPanel {
+public class VarianceTestPanel extends JPanel {
     private TablePanel RiTable;
     private JPanel parametersPanel;
     private JPanel resultPanel;

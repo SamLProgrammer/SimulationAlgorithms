@@ -20,7 +20,8 @@ import javax.swing.SwingConstants;
 
 import org.example.controller.Controller;
 
-public class MeansTestPanel extends JPanel {
+public class VarianceTestPanel extends JPanel {
+    
     private TablePanel RiTable;
     private JPanel parametersPanel;
     private JPanel resultPanel;
@@ -36,7 +37,7 @@ public class MeansTestPanel extends JPanel {
 
     private Controller controller;
 
-    public MeansTestPanel(Controller controller) {
+    public VarianceTestPanel(Controller controller) {
         initProperties();
         initComponents(controller);
         setAllComponentListeners();

@@ -20,7 +20,8 @@ import javax.swing.SwingConstants;
 
 import org.example.controller.Controller;
 
-public class MeansTestPanel extends JPanel {
+public class VarianceTestPanel extends JPanel {
+
     private TablePanel RiTable;
     private JPanel parametersPanel;
     private JPanel resultPanel;
@@ -36,7 +37,7 @@ public class MeansTestPanel extends JPanel {
 
     private Controller controller;
 
-    public MeansTestPanel(Controller controller) {
+    public VarianceTestPanel(Controller controller) {
         initProperties();
         initComponents(controller);
         setAllComponentListeners();
@@ -280,22 +281,12 @@ public class MeansTestPanel extends JPanel {
         acceptanceLevelField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
+                System.out.println("amm yep");
                 int asciiCode = e.getKeyChar();
                 if (!((asciiCode < 48 || asciiCode > 57) && asciiCode != 46 && asciiCode != 44 && asciiCode != 8)) {
                     if (acceptanceLevelField.getText().length() > 0) {
-                        Map<String, Double> statsMap = invokeMeansTest();
-                        for (Map.Entry<String, Double> entry : statsMap.entrySet()) {
-                            String key = entry.getKey();
-                            Double value = entry.getValue();
-                            JTextArea valueHolderComponent = (JTextArea) findChildByName(key);
-                            if (valueHolderComponent != null) {
-
-                                valueHolderComponent.setText((!key.equals("result")) ? "  " + String.valueOf(value)
-                                        : (value == 1.0) ? "Passed" : "Failed");
-                                valueHolderComponent.setEditable(false);
-
-                            }
-                        }
+                        Map<String, Double> statsMap = invokeVarianceTest();
+                        System.out.println(statsMap);
                     }
                 } else {
                     e.consume();
@@ -316,12 +307,12 @@ public class MeansTestPanel extends JPanel {
         }
     }
 
-    private Map<String, Double> invokeMeansTest() {
+    private Map<String, Double> invokeVarianceTest() {
         String stringValue = acceptanceLevelField.getText();
         if (stringValue.charAt(stringValue.length() - 1) == '.') {
             stringValue += '0';
         }
-        return controller.invokeMeansTest(Double.parseDouble(stringValue));
+        return controller.invokeVarianceTest(Double.parseDouble(stringValue));
     }
 
     private JComponent findChildByName(String name) {
@@ -345,7 +336,7 @@ public class MeansTestPanel extends JPanel {
         return null;
     }
 
-    private MeansTestPanel myInstance() {
+    private VarianceTestPanel myInstance() {
         return this;
     }
 

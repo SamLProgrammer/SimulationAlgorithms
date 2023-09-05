@@ -217,7 +217,7 @@ public class MeansTestPanel extends JPanel {
         calculatedResultsConstraint5.weightx = 0.25;
         calculatedResultsConstraint5.weighty = 0.25;
 
-        JLabel leftLimitLabel = new JLabel("L.L.", SwingConstants.CENTER);
+        JLabel leftLimitLabel = new JLabel("LL", SwingConstants.CENTER);
         JPanel leftLimitContainer = new JPanel(new BorderLayout());
         leftLimitArea = new JTextArea(1, 5);
         leftLimitArea.setName("leftLimit");
@@ -234,7 +234,7 @@ public class MeansTestPanel extends JPanel {
         calculatedResultsConstraint6.weightx = 0.25;
         calculatedResultsConstraint6.weighty = 0.25;
 
-        JLabel rightLimitLabel = new JLabel("R.L.", SwingConstants.CENTER);
+        JLabel rightLimitLabel = new JLabel("RL", SwingConstants.CENTER);
         JPanel rightLimitContainer = new JPanel(new BorderLayout());
         rightLimitArea = new JTextArea(1, 5);
         rightLimitArea.setName("rightLimit");

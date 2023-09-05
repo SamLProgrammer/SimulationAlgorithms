@@ -19,14 +19,13 @@ public class Tests {
 
     private void initComponents(StatisticFunctions statisticFunctions) {
         meansTest = new MeansTest(statisticFunctions);
-        varianceTest = new VarianceTest(statisticFunctions);
     }
 
-    public Map<String, Double> invokeMeansTest(double acceptanceRate, ArrayList<Double> randomsList) {
+    public Map<String, Double> invokeMeansTest(double acceptanceRate, int n, ArrayList<Double> randomsList) {
         return meansTest.executeTest(acceptanceRate,randomsList);
     }
 
-    public Map<String, Double> invokeVarianceTest(double acceptanceRate, ArrayList<Double> randomsList) {
+    public Map<String, Double> invokeVarianceTest(double acceptanceRate, int n, ArrayList<Double> randomsList) {
         return varianceTest.executeTest(acceptanceRate, randomsList);
     }
 }
