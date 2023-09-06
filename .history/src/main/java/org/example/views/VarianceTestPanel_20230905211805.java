@@ -202,7 +202,7 @@ public class VarianceTestPanel extends JPanel {
         calculatedResultsConstraint8.weightx = 0.25;
         calculatedResultsConstraint8.weighty = weightY;
 
-        JLabel inverseHalfAlphaXLabel = new JLabel("\u03C7\u00B2 (1 - \u03B1 / 2)", SwingConstants.CENTER);
+        JLabel inverseHalfAlphaXLabel = new JLabel("I.A.", SwingConstants.CENTER);
         JPanel inverseHalfAlphaXContainer = new JPanel(new BorderLayout());
         inverseHalfAlphaXValueArea = new JTextArea(1, 5);
         inverseHalfAlphaXValueArea.setName("inverseHalfAlphaX");
@@ -219,7 +219,7 @@ public class VarianceTestPanel extends JPanel {
         calculatedResultsConstraint6.weightx = 0.25;
         calculatedResultsConstraint6.weighty = weightY;
 
-        JLabel halfAlphaXValueAreaLabel = new JLabel("\u03C7\u00B2 (\u03B1 / 2)", SwingConstants.CENTER);
+        JLabel halfAlphaXValueAreaLabel = new JLabel("H.A.", SwingConstants.CENTER);
         JPanel halfAlphaXContainer = new JPanel(new BorderLayout());
         halfAlphaXValueArea = new JTextArea(1, 5);
         halfAlphaXValueArea.setName("halfAlphaX");

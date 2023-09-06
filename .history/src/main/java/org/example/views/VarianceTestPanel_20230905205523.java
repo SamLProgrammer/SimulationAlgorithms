@@ -83,11 +83,11 @@ public class VarianceTestPanel extends JPanel {
         JPanel resultContainer = new JPanel(new BorderLayout());
         JPanel averageContainer = new JPanel(new BorderLayout());
         JLabel resultLabel = new JLabel("Result: ");
-        JLabel averageLabel = new JLabel("Variance: ");
+        JLabel averageLabel = new JLabel("Average: ");
         resultPane = new JTextArea(1, 6);
         resultPane.setName("result");
         averagePane = new JTextArea(1,6);
-        averagePane.setName("variance");
+        averagePane.setName("average");
         averageContainer.add(averageLabel, BorderLayout.WEST);
         averageContainer.add(averagePane);
         resultContainer.add(resultLabel, BorderLayout.WEST);
@@ -202,7 +202,7 @@ public class VarianceTestPanel extends JPanel {
         calculatedResultsConstraint8.weightx = 0.25;
         calculatedResultsConstraint8.weighty = weightY;
 
-        JLabel inverseHalfAlphaXLabel = new JLabel("\u03C7\u00B2 (1 - \u03B1 / 2)", SwingConstants.CENTER);
+        JLabel inverseHalfAlphaXLabel = new JLabel("I.A.", SwingConstants.CENTER);
         JPanel inverseHalfAlphaXContainer = new JPanel(new BorderLayout());
         inverseHalfAlphaXValueArea = new JTextArea(1, 5);
         inverseHalfAlphaXValueArea.setName("inverseHalfAlphaX");
@@ -219,7 +219,7 @@ public class VarianceTestPanel extends JPanel {
         calculatedResultsConstraint6.weightx = 0.25;
         calculatedResultsConstraint6.weighty = weightY;
 
-        JLabel halfAlphaXValueAreaLabel = new JLabel("\u03C7\u00B2 (\u03B1 / 2)", SwingConstants.CENTER);
+        JLabel halfAlphaXValueAreaLabel = new JLabel("H.A.", SwingConstants.CENTER);
         JPanel halfAlphaXContainer = new JPanel(new BorderLayout());
         halfAlphaXValueArea = new JTextArea(1, 5);
         halfAlphaXValueArea.setName("halfAlphaX");
@@ -312,6 +312,8 @@ public class VarianceTestPanel extends JPanel {
                 if (!((asciiCode < 48 || asciiCode > 57) && asciiCode != 46 && asciiCode != 44 && asciiCode != 8)) {
                     if (acceptanceLevelField.getText().length() > 0) {
                         Map<String, Double> statsMap = invokeVarianceTest();
+                        System.out.println("statsMap");
+                        System.out.println(statsMap);
                         for (Map.Entry<String, Double> entry : statsMap.entrySet()) {
                             String key = entry.getKey();
                             Double value = entry.getValue();

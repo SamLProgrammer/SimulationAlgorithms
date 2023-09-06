@@ -50,11 +50,6 @@ public class VarianceTest {
         inverseHalfAlphaX = Double.parseDouble(statisticFunctions.getCHISSQInv(inverseHalfAlpha, n - 1).replace(',', '.'));
         leftLimit = inverseHalfAlphaX / (12 * (n - 1));
         rightLimit = halfAlphaX / (12 * (n - 1));
-
-        leftLimit = formatDouble(leftLimit);
-        rightLimit = formatDouble(rightLimit);
-        variance = formatDouble(variance);
-
         return (leftLimit <= variance && rightLimit >= variance) ? 1.0 : 0.0;
     }
 
