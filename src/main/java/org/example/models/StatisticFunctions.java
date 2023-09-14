@@ -86,7 +86,7 @@ public class StatisticFunctions {
         }
         System.out.println("calculatedResult");
         System.out.println(calculatedResult);
-        return calculatedResult;
+        return calculatedResult.replace(',', '.');
     }
 
     //==================================================== GOOGLE SHEET API CALLS ====================================================
