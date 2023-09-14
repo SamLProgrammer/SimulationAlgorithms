@@ -22,7 +22,7 @@ import org.example.models.ChiSquaredResult;
 public class ChiSquareTestPanel extends JPanel {
 
     private Controller controller;
-    private ChiTablePanel RiTable;
+    private TablePanel RiTable;
     private JPanel parametersPanel;
     private JPanel resultPanel;
     private JTextArea acceptanceLevelField;
@@ -48,7 +48,7 @@ public class ChiSquareTestPanel extends JPanel {
         this.controller = controller;
 
         double weightY = 1.0/7;
-        RiTable = new ChiTablePanel();
+        RiTable = new TablePanel();
         parametersPanel = new JPanel(new GridBagLayout());
         resultPanel = new JPanel(new GridBagLayout());
 
@@ -69,6 +69,10 @@ public class ChiSquareTestPanel extends JPanel {
         percentageContainer.add(percentageLabel, BorderLayout.WEST);
         percentageContainer.add(acceptanceLevelField);
         percentageContainer.setName("perC");
+
+        RiTable.setBackground(Color.RED);
+        parametersPanel.setBackground(Color.GREEN);
+        resultPanel.setBackground(Color.BLUE);
 
         JPanel resultMainContainer = new JPanel();
         resultMainContainer.setLayout(new BoxLayout(resultMainContainer, BoxLayout.Y_AXIS));
@@ -257,7 +261,7 @@ public class ChiSquareTestPanel extends JPanel {
         setFontRecursively(myInstance());
     }
 
-    public void setRiTable(ChiTablePanel riTable) {
+    public void setRiTable(TablePanel riTable) {
         RiTable = riTable;
     }
 

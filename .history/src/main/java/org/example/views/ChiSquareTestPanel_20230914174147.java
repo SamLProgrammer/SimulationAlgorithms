@@ -70,6 +70,7 @@ public class ChiSquareTestPanel extends JPanel {
         percentageContainer.add(acceptanceLevelField);
         percentageContainer.setName("perC");
 
+
         JPanel resultMainContainer = new JPanel();
         resultMainContainer.setLayout(new BoxLayout(resultMainContainer, BoxLayout.Y_AXIS));
         JPanel resultContainer = new JPanel(new BorderLayout());

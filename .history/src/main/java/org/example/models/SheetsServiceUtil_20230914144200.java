@@ -11,22 +11,22 @@ import java.io.InputStream;
 public class SheetsServiceUtil {
 
     private static final String CREDENTIALS_FILE_PATH = "jsonKey3.json";
-    public static Sheets sheetsService;
+    private Sheets googleCredential;
 
 
 
-    public static Sheets getSheetsService() throws IOException, GeneralSecurityException {
-        if(sheetsService == null) {
+    public Sheets getSheetsService() throws IOException, GeneralSecurityException {
+        if(googleCredential != null) {
         InputStream credentialsStream = SheetsServiceUtil.class.getClassLoader().getResourceAsStream(CREDENTIALS_FILE_PATH);
 
         GoogleCredential credentials = GoogleCredential.fromStream(credentialsStream)
                 .createScoped(Collections.singleton(SheetsScopes.SPREADSHEETS));
 
-        return sheetsService = new Sheets.Builder(credentials.getTransport(), credentials.getJsonFactory(), credentials)
+        return googleCredential = new Sheets.Builder(credentials.getTransport(), credentials.getJsonFactory(), credentials)
                 .setApplicationName("Your Application Name")
                 .build();
         } else {
-            return sheetsService;
+            return googleCredential;
         }
     }
 

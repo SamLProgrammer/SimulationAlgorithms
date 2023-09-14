@@ -35,10 +35,6 @@ public class ChiInterval {
         return end;
     }
 
-    public double getStart() {
-        return start;
-    }
-
     public void setOcurrences(double ocurrences) {
         this.ocurrences = ocurrences;
     }

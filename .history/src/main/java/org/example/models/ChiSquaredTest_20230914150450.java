@@ -6,11 +6,15 @@ import java.util.List;
 import java.util.Map;
 
 public class ChiSquaredTest {
-
+    
     private ArrayList<ChiInterval> intervals;
+    private int intervalsNumber;
+    private double acceptanceError;
+    private boolean result;
+    private double min;
+    private double max;
     private StatisticFunctions sf;
     private double chiInvTest;
-    private double halfAlpha;
 
     public ChiSquaredTest(StatisticFunctions sf) {
         this.sf = sf;
@@ -21,38 +25,33 @@ public class ChiSquaredTest {
         intervals = new ArrayList<>();
     }
 
-    public ChiSquaredResult executeTest(ArrayList<Double> randomNumbersList, int intervalsAmount,
-            double acceptanceError) {
-        initComponents();
-        halfAlpha = (100 - acceptanceError) / 200;
-        ArrayList<Double> copyRandomNumbersList = new ArrayList<>(randomNumbersList);
+    public ChiSquaredResult executeTest(ArrayList<Double> randomNumbersList, int intervalsAmount, double acceptanceError) {
         double min = 1;
         double max = 0;
 
-        for (Double currentNumber : copyRandomNumbersList) {
-            if (currentNumber < min) {
+        for (Double currentNumber : randomNumbersList) {
+            if(currentNumber < min) {
                 min = currentNumber;
             }
-            if (currentNumber > max) {
+            if(currentNumber > max) {
                 max = currentNumber;
             }
         }
-        double intervalWidth = (max - min) / intervalsAmount;
-        double currentMin = min;
-        for (int i = 0; i < intervalsAmount; i++) {
-            intervals.add(new ChiInterval(i + 1, currentMin, min + intervalWidth * (i + 1),
-                    (double)copyRandomNumbersList.size() / (double)intervalsAmount));
-            currentMin = currentMin + intervalWidth;
+        double intervalWidth = max - min;
+        for(int i = 0; i < intervalsAmount; i++) {
+            intervals.add(new ChiInterval(i+1, min, min + intervalWidth * (i+1), randomNumbersList.size()/intervalsAmount));
         }
-        
-        quickSort(copyRandomNumbersList, 0, copyRandomNumbersList.size() - 1);
+
+        quickSort(randomNumbersList, 0, randomNumbersList.size()-1);
 
         int ocurrences = 0;
         int index = 0;
         double totalError = 0;
         for (ChiInterval interval : intervals) {
-            while (index < copyRandomNumbersList.size() && copyRandomNumbersList.get(index) < interval.getEnd()) {
-                ocurrences++;
+            while(index < randomNumbersList.size()) {
+                if(randomNumbersList.get(index) < interval.getEnd()) {
+                    ocurrences ++;
+                }
                 index++;
             }
             interval.setOcurrences(ocurrences);
@@ -60,14 +59,12 @@ public class ChiSquaredTest {
             ocurrences = 0;
         }
 
-        chiInvTest = Double.valueOf(sf.getCHIInv(halfAlpha, intervalsAmount - 1));
+        chiInvTest = Double.valueOf(sf.getCHIInv(acceptanceError, intervalsAmount-1));
 
         Map<String, Double> statsMap = new HashMap<String, Double>();
 
-        statsMap.put("max", formatDouble(max));
-        statsMap.put("min", formatDouble(min));
-        statsMap.put("chiInvTest", formatDouble(chiInvTest));
-        statsMap.put("totalError", formatDouble(totalError));
+        statsMap.put("max", max);
+        statsMap.put("min", min);
         statsMap.put("result", totalError < chiInvTest ? 1.0 : 0.0);
 
         ChiSquaredResult chiSquaredResult = new ChiSquaredResult(statsMap, setupTableData(), intervalsAmount);
@@ -111,15 +108,5 @@ public class ChiSquaredTest {
         list.set(end, swapTemp);
 
         return i + 1;
-    }
-
-    private Double formatDouble(double value) {
-        String valueString = String.valueOf(value);
-        String decimalSide = valueString.split("\\.")[1];
-        int remainingDecimals = 0;
-        if(decimalSide.length() > 5) {
-            remainingDecimals = decimalSide.length() - 5;
-        }
-        return Double.parseDouble(valueString.substring(0, valueString.length()-remainingDecimals));
     }
 }

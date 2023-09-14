@@ -41,7 +41,7 @@ public class ChiSquaredTest {
         double currentMin = min;
         for (int i = 0; i < intervalsAmount; i++) {
             intervals.add(new ChiInterval(i + 1, currentMin, min + intervalWidth * (i + 1),
-                    (double)copyRandomNumbersList.size() / (double)intervalsAmount));
+                    copyRandomNumbersList.size() / intervalsAmount));
             currentMin = currentMin + intervalWidth;
         }
         
@@ -64,10 +64,10 @@ public class ChiSquaredTest {
 
         Map<String, Double> statsMap = new HashMap<String, Double>();
 
-        statsMap.put("max", formatDouble(max));
-        statsMap.put("min", formatDouble(min));
-        statsMap.put("chiInvTest", formatDouble(chiInvTest));
-        statsMap.put("totalError", formatDouble(totalError));
+        statsMap.put("max", max);
+        statsMap.put("min", min);
+        statsMap.put("chiInvTest", chiInvTest);
+        statsMap.put("totalError", totalError);
         statsMap.put("result", totalError < chiInvTest ? 1.0 : 0.0);
 
         ChiSquaredResult chiSquaredResult = new ChiSquaredResult(statsMap, setupTableData(), intervalsAmount);
@@ -111,15 +111,5 @@ public class ChiSquaredTest {
         list.set(end, swapTemp);
 
         return i + 1;
-    }
-
-    private Double formatDouble(double value) {
-        String valueString = String.valueOf(value);
-        String decimalSide = valueString.split("\\.")[1];
-        int remainingDecimals = 0;
-        if(decimalSide.length() > 5) {
-            remainingDecimals = decimalSide.length() - 5;
-        }
-        return Double.parseDouble(valueString.substring(0, valueString.length()-remainingDecimals));
     }
 }

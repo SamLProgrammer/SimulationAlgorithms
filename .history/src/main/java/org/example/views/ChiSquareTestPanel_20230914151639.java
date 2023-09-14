@@ -3,12 +3,14 @@ package org.example.views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Map;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -17,12 +19,11 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import org.example.controller.Controller;
-import org.example.models.ChiSquaredResult;
 
 public class ChiSquareTestPanel extends JPanel {
 
     private Controller controller;
-    private ChiTablePanel RiTable;
+    private TablePanel RiTable;
     private JPanel parametersPanel;
     private JPanel resultPanel;
     private JTextArea acceptanceLevelField;
@@ -31,13 +32,14 @@ public class ChiSquareTestPanel extends JPanel {
     private JTextArea inverseHalfAlfaValueArea;
     private JTextArea halfAlphaXValueArea;
     private JTextArea inverseHalfAlphaXValueArea;
+    private JTextArea leftLimitArea;
+    private JTextArea rightLimitArea;
     private JTextArea averagePane; 
     private JTextArea resultPane; 
 
     public ChiSquareTestPanel(Controller controller) {
         initProperties();
         initComponents(controller);
-        setAllComponentListeners();
     }
 
     private void initProperties() {
@@ -48,14 +50,13 @@ public class ChiSquareTestPanel extends JPanel {
         this.controller = controller;
 
         double weightY = 1.0/7;
-        RiTable = new ChiTablePanel();
+        RiTable = new TablePanel();
         parametersPanel = new JPanel(new GridBagLayout());
         resultPanel = new JPanel(new GridBagLayout());
 
         JPanel acceptanceLevelContainer = new JPanel();
         acceptanceLevelContainer.setLayout(new BoxLayout(acceptanceLevelContainer, BoxLayout.Y_AXIS));
-        JLabel acceptanceLevelLabel = new JLabel("Chi\u00B2", SwingConstants.CENTER);
-        acceptanceLevelLabel.setFont(new Font("Oswald", Font.BOLD, 20));
+        JLabel acceptanceLevelLabel = new JLabel("Acceptance Level", SwingConstants.CENTER);
         acceptanceLevelLabel.setAlignmentX(JLabel.CENTER_ALIGNMENT);
 
         acceptanceLevelField = new JTextArea(1, 3);
@@ -70,16 +71,20 @@ public class ChiSquareTestPanel extends JPanel {
         percentageContainer.add(acceptanceLevelField);
         percentageContainer.setName("perC");
 
+        RiTable.setBackground(Color.RED);
+        parametersPanel.setBackground(Color.GREEN);
+        resultPanel.setBackground(Color.BLUE);
+
         JPanel resultMainContainer = new JPanel();
         resultMainContainer.setLayout(new BoxLayout(resultMainContainer, BoxLayout.Y_AXIS));
         JPanel resultContainer = new JPanel(new BorderLayout());
         JPanel averageContainer = new JPanel(new BorderLayout());
         JLabel resultLabel = new JLabel("Result: ");
-        JLabel averageLabel = new JLabel("Chi Inv: ");
+        JLabel averageLabel = new JLabel("Variance: ");
         resultPane = new JTextArea(1, 6);
         resultPane.setName("result");
         averagePane = new JTextArea(1,6);
-        averagePane.setName("chiInvTest");
+        averagePane.setName("variance");
         averageContainer.add(averageLabel, BorderLayout.WEST);
         averageContainer.add(averagePane);
         resultContainer.add(resultLabel, BorderLayout.WEST);
@@ -95,9 +100,9 @@ public class ChiSquareTestPanel extends JPanel {
         JPanel paramsAndResultsPanel = new JPanel(new GridBagLayout());
 
         acceptanceLevelContainer.add(acceptanceLevelLabel);
-        // acceptanceLevelContainer.add(Box.createRigidArea(new Dimension(0, 5)));
+        acceptanceLevelContainer.add(Box.createRigidArea(new Dimension(0, 5)));
 
-        // acceptanceLevelContainer.add(percentageContainer);
+        acceptanceLevelContainer.add(percentageContainer);
 
         GridBagConstraints riTableConstraints = new GridBagConstraints();
         riTableConstraints.gridx = 0;
@@ -141,11 +146,11 @@ public class ChiSquareTestPanel extends JPanel {
         calculatedResultsConstraint.weightx = 0.25;
         // calculatedResultsConstraint.weighty = weightY;
 
-        JLabel alphaLabel = new JLabel("Acceptance Rate % ", SwingConstants.CENTER);
+        JLabel alphaLabel = new JLabel("\u03B1", SwingConstants.CENTER);
         JPanel alphaContainer = new JPanel(new BorderLayout());
-        alphaValueArea = new JTextArea(1, 3);
-        alphaValueArea.setName("acceptanceRate");
-        setStatsAreaProperties(alphaValueArea, true);
+        alphaValueArea = new JTextArea(1, 5);
+        alphaValueArea.setName("alphaRate");
+        setStatsAreaProperties(alphaValueArea);
         alphaContainer.add(alphaLabel, BorderLayout.WEST);
         alphaContainer.add(alphaValueArea);
         parametersPanel.add(alphaContainer, calculatedResultsConstraint);
@@ -158,11 +163,11 @@ public class ChiSquareTestPanel extends JPanel {
         calculatedResultsConstraint2.weightx = 0.25;
         // calculatedResultsConstraint2.weighty = weightY;
 
-        JLabel halfAlphaLabel = new JLabel("Intervals", SwingConstants.CENTER);
+        JLabel halfAlphaLabel = new JLabel("\u03B1 / 2", SwingConstants.CENTER);
         JPanel halfAlphaContainer = new JPanel(new BorderLayout());
-        halfAlfaValueArea = new JTextArea(1, 3);
-        halfAlfaValueArea.setName("intervals");
-        setStatsAreaProperties(halfAlfaValueArea, true);
+        halfAlfaValueArea = new JTextArea(1, 5);
+        halfAlfaValueArea.setName("halfAlphaRate");
+        setStatsAreaProperties(halfAlfaValueArea);
         halfAlphaContainer.add(halfAlphaLabel, BorderLayout.WEST);
         halfAlphaContainer.add(halfAlfaValueArea);
         parametersPanel.add(halfAlphaContainer, calculatedResultsConstraint2);
@@ -175,16 +180,33 @@ public class ChiSquareTestPanel extends JPanel {
         calculatedResultsConstraint3.weightx = 0.25;
         // calculatedResultsConstraint3.weighty = weightY;
 
-        JLabel inverseHalfAlphaLabel = new JLabel("Min", SwingConstants.CENTER);
+        JLabel inverseHalfAlphaLabel = new JLabel("1 - \u03B1 / 2", SwingConstants.CENTER);
         JPanel inverseHalfAlphaContainer = new JPanel(new BorderLayout());
         inverseHalfAlfaValueArea = new JTextArea(1, 5);
-        inverseHalfAlfaValueArea.setName("min");
-        setStatsAreaProperties(inverseHalfAlfaValueArea, false);
+        inverseHalfAlfaValueArea.setName("relativeAlphaRate");
+        setStatsAreaProperties(inverseHalfAlfaValueArea);
         inverseHalfAlphaContainer.add(inverseHalfAlphaLabel, BorderLayout.WEST);
         inverseHalfAlphaContainer.add(inverseHalfAlfaValueArea);
         parametersPanel.add(inverseHalfAlphaContainer, calculatedResultsConstraint3);
 
         // =========================================================================================
+
+        // GridBagConstraints calculatedResultsConstraint8 = new GridBagConstraints();
+        // calculatedResultsConstraint8.gridx = 0;
+        // calculatedResultsConstraint8.gridy = 3;
+        // calculatedResultsConstraint8.gridwidth = 1;
+        // calculatedResultsConstraint8.gridheight = 1;
+        // calculatedResultsConstraint8.weightx = 0.25;
+        // calculatedResultsConstraint8.weighty = weightY;
+
+        // JLabel inverseHalfAlphaXLabel = new JLabel("\u03C7\u00B2 (1 - \u03B1 / 2)", SwingConstants.CENTER);
+        // JPanel inverseHalfAlphaXContainer = new JPanel(new BorderLayout());
+        // inverseHalfAlphaXValueArea = new JTextArea(1, 5);
+        // inverseHalfAlphaXValueArea.setName("inverseHalfAlphaX");
+        // setStatsAreaProperties(inverseHalfAlphaXValueArea);
+        // inverseHalfAlphaXContainer.add(inverseHalfAlphaXLabel, BorderLayout.WEST);
+        // inverseHalfAlphaXContainer.add(inverseHalfAlphaXValueArea);
+        // parametersPanel.add(inverseHalfAlphaXContainer, calculatedResultsConstraint8);
 
         GridBagConstraints calculatedResultsConstraint6 = new GridBagConstraints();
         calculatedResultsConstraint6.gridx = 1;
@@ -194,42 +216,23 @@ public class ChiSquareTestPanel extends JPanel {
         calculatedResultsConstraint6.weightx = 0.25;
         calculatedResultsConstraint6.weighty = weightY;
 
-        JLabel halfAlphaXValueAreaLabel = new JLabel("Max", SwingConstants.CENTER);
+        JLabel halfAlphaXValueAreaLabel = new JLabel("\u03C7\u00B2 (\u03B1 / 2)", SwingConstants.CENTER);
         JPanel halfAlphaXContainer = new JPanel(new BorderLayout());
         halfAlphaXValueArea = new JTextArea(1, 5);
-        halfAlphaXValueArea.setName("max");
-        setStatsAreaProperties(halfAlphaXValueArea, false);
+        halfAlphaXValueArea.setName("halfAlphaX");
+        setStatsAreaProperties(halfAlphaXValueArea);
         halfAlphaXContainer.add(halfAlphaXValueAreaLabel, BorderLayout.WEST);
         halfAlphaXContainer.add(halfAlphaXValueArea);
         
         parametersPanel.add(halfAlphaXContainer, calculatedResultsConstraint6);
 
-        GridBagConstraints calculatedResultsConstraint8 = new GridBagConstraints();
-        calculatedResultsConstraint8.gridx = 0;
-        calculatedResultsConstraint8.gridy = 3;
-        calculatedResultsConstraint8.gridwidth = 1;
-        calculatedResultsConstraint8.gridheight = 1;
-        calculatedResultsConstraint8.weightx = 0.25;
-        calculatedResultsConstraint8.weighty = weightY;
-
-        JLabel inverseHalfAlphaXValueAreaLabel = new JLabel("Error Sum ", SwingConstants.CENTER);
-        JPanel inverseHalfAlphaXValueAreaContainer = new JPanel(new BorderLayout());
-        inverseHalfAlphaXValueArea = new JTextArea(1, 5);
-        inverseHalfAlphaXValueArea.setName("totalError");
-        setStatsAreaProperties(inverseHalfAlphaXValueArea, false);
-        inverseHalfAlphaXValueAreaContainer.add(inverseHalfAlphaXValueAreaLabel, BorderLayout.WEST);
-        inverseHalfAlphaXValueAreaContainer.add(inverseHalfAlphaXValueArea);
-        
-        parametersPanel.add(inverseHalfAlphaXValueAreaContainer, calculatedResultsConstraint8);
-
-
-        GridBagConstraints calculatedResultsConstraint9 = new GridBagConstraints();
-        calculatedResultsConstraint9.gridx = 1;
-        calculatedResultsConstraint9.gridy = 4;
-        calculatedResultsConstraint9.gridwidth = 1;
-        calculatedResultsConstraint9.gridheight = 1;
-        calculatedResultsConstraint9.weightx = 0.25;
-        calculatedResultsConstraint9.weighty = weightY;
+         GridBagConstraints calculatedResultsConstraint5 = new GridBagConstraints();
+        calculatedResultsConstraint5.gridx = 1;
+        calculatedResultsConstraint5.gridy = 3;
+        calculatedResultsConstraint5.gridwidth = 1;
+        calculatedResultsConstraint5.gridheight = 1;
+        calculatedResultsConstraint5.weightx = 0.25;
+        calculatedResultsConstraint5.weighty = weightY;
 
         // =========================================================================================
 
@@ -254,10 +257,9 @@ public class ChiSquareTestPanel extends JPanel {
         paramsAndResultsContainerConstraints.weighty = 0.15;
         paramsAndResultsContainerConstraints.fill = GridBagConstraints.BOTH;
         add(paramsAndResultsPanel, paramsAndResultsContainerConstraints);
-        setFontRecursively(myInstance());
     }
 
-    public void setRiTable(ChiTablePanel riTable) {
+    public void setRiTable(TablePanel riTable) {
         RiTable = riTable;
     }
 
@@ -266,16 +268,13 @@ public class ChiSquareTestPanel extends JPanel {
     }
 
     private void setKeyListenerOnAcceptanceRate() {
-        alphaValueArea.addKeyListener(new KeyAdapter() {
+        acceptanceLevelField.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                System.out.println(e.getKeyChar());
                 int asciiCode = e.getKeyChar();
                 if (!((asciiCode < 48 || asciiCode > 57) && asciiCode != 46 && asciiCode != 44 && asciiCode != 8)) {
-                    if (alphaValueArea.getText().length() > 0) {
-                        ChiSquaredResult chiSquaredResult = invokeVarianceTest();
-                        Map<String, Double> statsMap = chiSquaredResult.getParametersMap();
-                        myInstance().RiTable.updateRowsTable(chiSquaredResult.getChiTableData());
+                    if (acceptanceLevelField.getText().length() > 0) {
+                        Map<String, Double> statsMap = invokeVarianceTest();
                         for (Map.Entry<String, Double> entry : statsMap.entrySet()) {
                             String key = entry.getKey();
                             Double value = entry.getValue();
@@ -308,12 +307,12 @@ public class ChiSquareTestPanel extends JPanel {
         }
     }
 
-    private ChiSquaredResult invokeVarianceTest() {
-        String stringValue = alphaValueArea.getText();
+    private Map<String, Double> invokeVarianceTest() {
+        String stringValue = acceptanceLevelField.getText();
         if (stringValue.charAt(stringValue.length() - 1) == '.') {
             stringValue += '0';
         }
-        return controller.invokeChiSquaredTest(Double.parseDouble(stringValue), halfAlfaValueArea.getText() == null ? 10 : Integer.valueOf(halfAlfaValueArea.getText()));
+        return controller.invokeVarianceTest(Double.parseDouble(stringValue));
     }
 
     private JComponent findChildByName(String name) {
@@ -341,13 +340,13 @@ public class ChiSquareTestPanel extends JPanel {
         return this;
     }
 
-    private void setStatsAreaProperties(JTextArea jTextArea, boolean editable) {
+    private void setStatsAreaProperties(JTextArea jTextArea) {
         jTextArea.setFont(new Font("Oswald", Font.BOLD, 16));
         jTextArea.setAlignmentX(JTextArea.CENTER_ALIGNMENT);
         jTextArea.setAlignmentY(JTextArea.CENTER_ALIGNMENT);
         jTextArea.setLineWrap(true);
         jTextArea.setWrapStyleWord(true);
-        jTextArea.setEditable(editable);
+        jTextArea.setEditable(false);
     }
 
     private void setFontRecursively(JComponent component) {

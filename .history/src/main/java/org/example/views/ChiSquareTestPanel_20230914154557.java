@@ -3,12 +3,14 @@ package org.example.views;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.Map;
+import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
@@ -17,12 +19,11 @@ import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
 import org.example.controller.Controller;
-import org.example.models.ChiSquaredResult;
 
 public class ChiSquareTestPanel extends JPanel {
 
     private Controller controller;
-    private ChiTablePanel RiTable;
+    private TablePanel RiTable;
     private JPanel parametersPanel;
     private JPanel resultPanel;
     private JTextArea acceptanceLevelField;
@@ -31,13 +32,14 @@ public class ChiSquareTestPanel extends JPanel {
     private JTextArea inverseHalfAlfaValueArea;
     private JTextArea halfAlphaXValueArea;
     private JTextArea inverseHalfAlphaXValueArea;
+    private JTextArea leftLimitArea;
+    private JTextArea rightLimitArea;
     private JTextArea averagePane; 
     private JTextArea resultPane; 
 
     public ChiSquareTestPanel(Controller controller) {
         initProperties();
         initComponents(controller);
-        setAllComponentListeners();
     }
 
     private void initProperties() {
@@ -48,7 +50,7 @@ public class ChiSquareTestPanel extends JPanel {
         this.controller = controller;
 
         double weightY = 1.0/7;
-        RiTable = new ChiTablePanel();
+        RiTable = new TablePanel();
         parametersPanel = new JPanel(new GridBagLayout());
         resultPanel = new JPanel(new GridBagLayout());
 
@@ -70,6 +72,10 @@ public class ChiSquareTestPanel extends JPanel {
         percentageContainer.add(acceptanceLevelField);
         percentageContainer.setName("perC");
 
+        RiTable.setBackground(Color.RED);
+        parametersPanel.setBackground(Color.GREEN);
+        resultPanel.setBackground(Color.BLUE);
+
         JPanel resultMainContainer = new JPanel();
         resultMainContainer.setLayout(new BoxLayout(resultMainContainer, BoxLayout.Y_AXIS));
         JPanel resultContainer = new JPanel(new BorderLayout());
@@ -79,7 +85,7 @@ public class ChiSquareTestPanel extends JPanel {
         resultPane = new JTextArea(1, 6);
         resultPane.setName("result");
         averagePane = new JTextArea(1,6);
-        averagePane.setName("chiInvTest");
+        averagePane.setName("chiInv");
         averageContainer.add(averageLabel, BorderLayout.WEST);
         averageContainer.add(averagePane);
         resultContainer.add(resultLabel, BorderLayout.WEST);
@@ -204,24 +210,6 @@ public class ChiSquareTestPanel extends JPanel {
         
         parametersPanel.add(halfAlphaXContainer, calculatedResultsConstraint6);
 
-        GridBagConstraints calculatedResultsConstraint8 = new GridBagConstraints();
-        calculatedResultsConstraint8.gridx = 0;
-        calculatedResultsConstraint8.gridy = 3;
-        calculatedResultsConstraint8.gridwidth = 1;
-        calculatedResultsConstraint8.gridheight = 1;
-        calculatedResultsConstraint8.weightx = 0.25;
-        calculatedResultsConstraint8.weighty = weightY;
-
-        JLabel inverseHalfAlphaXValueAreaLabel = new JLabel("Error Sum ", SwingConstants.CENTER);
-        JPanel inverseHalfAlphaXValueAreaContainer = new JPanel(new BorderLayout());
-        inverseHalfAlphaXValueArea = new JTextArea(1, 5);
-        inverseHalfAlphaXValueArea.setName("totalError");
-        setStatsAreaProperties(inverseHalfAlphaXValueArea, false);
-        inverseHalfAlphaXValueAreaContainer.add(inverseHalfAlphaXValueAreaLabel, BorderLayout.WEST);
-        inverseHalfAlphaXValueAreaContainer.add(inverseHalfAlphaXValueArea);
-        
-        parametersPanel.add(inverseHalfAlphaXValueAreaContainer, calculatedResultsConstraint8);
-
 
         GridBagConstraints calculatedResultsConstraint9 = new GridBagConstraints();
         calculatedResultsConstraint9.gridx = 1;
@@ -257,7 +245,7 @@ public class ChiSquareTestPanel extends JPanel {
         setFontRecursively(myInstance());
     }
 
-    public void setRiTable(ChiTablePanel riTable) {
+    public void setRiTable(TablePanel riTable) {
         RiTable = riTable;
     }
 
@@ -269,13 +257,10 @@ public class ChiSquareTestPanel extends JPanel {
         alphaValueArea.addKeyListener(new KeyAdapter() {
             @Override
             public void keyReleased(KeyEvent e) {
-                System.out.println(e.getKeyChar());
                 int asciiCode = e.getKeyChar();
                 if (!((asciiCode < 48 || asciiCode > 57) && asciiCode != 46 && asciiCode != 44 && asciiCode != 8)) {
                     if (alphaValueArea.getText().length() > 0) {
-                        ChiSquaredResult chiSquaredResult = invokeVarianceTest();
-                        Map<String, Double> statsMap = chiSquaredResult.getParametersMap();
-                        myInstance().RiTable.updateRowsTable(chiSquaredResult.getChiTableData());
+                        Map<String, Double> statsMap = invokeVarianceTest();
                         for (Map.Entry<String, Double> entry : statsMap.entrySet()) {
                             String key = entry.getKey();
                             Double value = entry.getValue();
@@ -308,12 +293,12 @@ public class ChiSquareTestPanel extends JPanel {
         }
     }
 
-    private ChiSquaredResult invokeVarianceTest() {
-        String stringValue = alphaValueArea.getText();
+    private Map<String, Double> invokeVarianceTest() {
+        String stringValue = acceptanceLevelField.getText();
         if (stringValue.charAt(stringValue.length() - 1) == '.') {
             stringValue += '0';
         }
-        return controller.invokeChiSquaredTest(Double.parseDouble(stringValue), halfAlfaValueArea.getText() == null ? 10 : Integer.valueOf(halfAlfaValueArea.getText()));
+        return controller.invokeVarianceTest(Double.parseDouble(stringValue));
     }
 
     private JComponent findChildByName(String name) {

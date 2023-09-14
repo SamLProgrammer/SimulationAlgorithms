@@ -61,8 +61,8 @@ public class Controller {
         return tests.invokeMeansTest(acceptanceRate, randomAlgorithms.getCurrentRandomList());
     }
 
-    public ChiSquaredResult invokeChiSquaredTest(double acceptanceRate, int intervalsAmount) {
-        return tests.invokeChiSquaredTest(acceptanceRate, randomAlgorithms.getCurrentRandomList(), intervalsAmount);
+    public ChiSquaredResult invokeChiSquaredTest(double acceptanceRate) {
+        return tests.invokeChiSquaredTest(0.05, randomAlgorithms.getCurrentRandomList(), 8);
     }
 
 }

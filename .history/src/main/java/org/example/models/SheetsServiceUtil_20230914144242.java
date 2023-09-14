@@ -11,11 +11,11 @@ import java.io.InputStream;
 public class SheetsServiceUtil {
 
     private static final String CREDENTIALS_FILE_PATH = "jsonKey3.json";
-    public static Sheets sheetsService;
+    private Sheets sheetsService;
 
 
 
-    public static Sheets getSheetsService() throws IOException, GeneralSecurityException {
+    public Sheets getSheetsService() throws IOException, GeneralSecurityException {
         if(sheetsService == null) {
         InputStream credentialsStream = SheetsServiceUtil.class.getClassLoader().getResourceAsStream(CREDENTIALS_FILE_PATH);
 
