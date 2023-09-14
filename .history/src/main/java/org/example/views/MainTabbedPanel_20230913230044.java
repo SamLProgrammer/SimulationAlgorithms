@@ -27,7 +27,7 @@ public class MainTabbedPanel extends JTabbedPane {
         riPanel = new RiPanel(controller);
         meansTestPanel = new MeansTestPanel(controller);
         varianceTestPanel = new VarianceTestPanel(controller);
-        chiSquarePanel = new ChiSquareTestPanel(controller);
+        chiSquarePanel = new ChiSquareTestPanel();
         smirnovTestPanel = new SmirnovTestPanel();
         pokerTestPanel = new PokerTestPanel();
 

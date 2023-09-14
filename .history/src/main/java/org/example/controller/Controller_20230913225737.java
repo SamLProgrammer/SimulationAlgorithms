@@ -61,7 +61,7 @@ public class Controller {
     }
 
     public void invokeChiSquaredTest(double acceptanceRate) {
-        tests.invokeChiSquaredTest(0.05, randomAlgorithms.getCurrentRandomList(), 8);
+        tests.invokeChiSquaredTest(acceptanceRate, randomAlgorithms.getCurrentRandomList(), 8);
     }
 
 }

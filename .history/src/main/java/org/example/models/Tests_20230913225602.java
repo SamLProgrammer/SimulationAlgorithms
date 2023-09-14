@@ -30,8 +30,4 @@ public class Tests {
     public Map<String, Double> invokeVarianceTest(double acceptanceRate, ArrayList<Double> randomsList) {
         return varianceTest.executeTest(acceptanceRate, randomsList);
     }
-
-    public void invokeChiSquaredTest(double acceptanceRatem, ArrayList<Double> randomsList, int intervalsAmount) {
-        chiSquaredTest.executeTest(randomsList, intervalsAmount, acceptanceRatem);
-    }
 }

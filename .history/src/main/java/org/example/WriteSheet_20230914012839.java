@@ -1,15 +1,14 @@
-package org.example.models;
+package org.example;
 
-import com.google.api.services.sheets.v4.Sheets;
-import com.google.api.services.sheets.v4.model.*;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.google.api.services.sheets.v4.Sheets;
 import com.google.api.services.sheets.v4.model.UpdateValuesResponse;
 
-public class StatisticFunctions {
+public class WriteSheet {
 
     public String getNormSINV(double baseNumber) {
         Sheets sheetsService;
@@ -33,63 +32,6 @@ public class StatisticFunctions {
         }
         return calculatedResult;
     }
-
-
-    public String getCHISSQInv(double halfAlpha, double n) {
-        Sheets sheetsService;
-        String spreadsheetId = "13ZBZcbLJuyOdMOftAW7Q1CONDQO05f-q3RSZ9qJdGFQ";
-        String range = "Sheet1!C2";
-
-        int row = 2;
-        int column = 3;
-        String calculatedResult = "";
-
-        try {
-            sheetsService = SheetsServiceUtil.getSheetsService();
-            updateCell(sheetsService, spreadsheetId, row, column, "=ROUND(CHISQ.INV.RT(" + 
-            String.valueOf(halfAlpha).replace('.', ',') + "; " + 
-            String.valueOf(n).replace('.', ',') + "); 5)");
-            calculatedResult = getCellValue(sheetsService, spreadsheetId, range);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (GeneralSecurityException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        System.out.println("calculatedResult");
-        System.out.println(calculatedResult);
-        return calculatedResult;
-    }
-
-    public String getCHIInv(double halfAlpha, double n) {
-        Sheets sheetsService;
-        String spreadsheetId = "13ZBZcbLJuyOdMOftAW7Q1CONDQO05f-q3RSZ9qJdGFQ";
-        String range = "Sheet1!C3";
-
-        int row = 3;
-        int column = 3;
-        String calculatedResult = "";
-
-        try {
-            sheetsService = SheetsServiceUtil.getSheetsService();
-            updateCell(sheetsService, spreadsheetId, row, column, "=ROUND(CHIINV(" + 
-            String.valueOf(halfAlpha).replace('.', ',') + "; " + 
-            String.valueOf(n).replace('.', ',') + "); 5)");
-            calculatedResult = getCellValue(sheetsService, spreadsheetId, range);
-        } catch (IOException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } catch (GeneralSecurityException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        System.out.println("calculatedResult");
-        System.out.println(calculatedResult);
-        return calculatedResult;
-    }
-
-    //==================================================== GOOGLE SHEET API CALLS ====================================================
 
     private String updateCell(Sheets sheetsService, String spreadsheetId, int row, int column, String value) {
         String range = String.format("Sheet1!%s%s", getColumnLetter(column), row);

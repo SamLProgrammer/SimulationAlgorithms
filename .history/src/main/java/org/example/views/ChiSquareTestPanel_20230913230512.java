@@ -3,10 +3,9 @@ package org.example.views;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
-import org.example.controller.Controller;
-
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.ModuleLayer.Controller;
 
 public class ChiSquareTestPanel extends JPanel {
 
