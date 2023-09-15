@@ -5,6 +5,9 @@ import org.example.controller.Controller;
 public class App {
 
     public static void main(String[] args) {
-        new Controller();
+
+        Controller c = new Controller();
+        c.generateWithCongruent(111, 251, 257, 13, 50, 'm', 5);
+
     }
 }

@@ -57,6 +57,8 @@ public class StatisticFunctions {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        System.out.println("calculatedResult");
+        System.out.println(calculatedResult);
         return calculatedResult;
     }
 
@@ -82,13 +84,15 @@ public class StatisticFunctions {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        System.out.println("calculatedResult");
+        System.out.println(calculatedResult);
         return calculatedResult.replace(',', '.');
     }
 
     public String getCHIInv2(double halfAlpha, double n) {
         Sheets sheetsService;
         String spreadsheetId = "13ZBZcbLJuyOdMOftAW7Q1CONDQO05f-q3RSZ9qJdGFQ";
-        String range = "Sheet1!C4";
+        String range = "Sheet1!C3";
 
         int row = 4;
         int column = 3;
@@ -107,6 +111,8 @@ public class StatisticFunctions {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        System.out.println("calculatedResult");
+        System.out.println(calculatedResult);
         return calculatedResult.replace(',', '.');
     }
 

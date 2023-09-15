@@ -36,8 +36,4 @@ public class Tests {
     public ChiSquaredResult invokeChiSquaredTest(double acceptanceRatem, ArrayList<Double> randomsList, int intervalsAmount) {
         return chiSquaredTest.executeTest(randomsList, intervalsAmount, acceptanceRatem);
     }
-
-    public PokerResult invokePokerTest(double acceptanceRatem, ArrayList<Double> randomsList) {
-        return pokerTest.executeTest(randomsList, acceptanceRatem);
-    }
 }

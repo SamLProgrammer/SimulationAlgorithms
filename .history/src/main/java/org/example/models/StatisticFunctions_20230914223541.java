@@ -88,7 +88,7 @@ public class StatisticFunctions {
     public String getCHIInv2(double halfAlpha, double n) {
         Sheets sheetsService;
         String spreadsheetId = "13ZBZcbLJuyOdMOftAW7Q1CONDQO05f-q3RSZ9qJdGFQ";
-        String range = "Sheet1!C4";
+        String range = "Sheet1!C3";
 
         int row = 4;
         int column = 3;

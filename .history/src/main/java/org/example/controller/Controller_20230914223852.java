@@ -66,7 +66,7 @@ public class Controller {
         return tests.invokeChiSquaredTest(acceptanceRate, randomAlgorithms.getCurrentRandomList(), intervalsAmount);
     }
 
-    public PokerResult invokePokerTest(double acceptanceRate) {
+    public PokerResult invokePokerTest(double acceptanceRate, int intervalsAmount) {
         return tests.invokePokerTest(acceptanceRate, randomAlgorithms.getCurrentRandomList());
     }
 
