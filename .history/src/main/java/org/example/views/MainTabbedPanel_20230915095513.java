@@ -28,15 +28,15 @@ public class MainTabbedPanel extends JTabbedPane {
         meansTestPanel = new MeansTestPanel(controller);
         varianceTestPanel = new VarianceTestPanel(controller);
         chiSquarePanel = new ChiSquareTestPanel(controller);
-        pokerTestPanel = new PokerTestPanel(controller);
         smirnovTestPanel = new SmirnovTestPanel();
+        pokerTestPanel = new PokerTestPanel(controller);
 
         addTab("Generate Ri", riPanel);
         addTab("Means Test", meansTestPanel);
         addTab("Variance Test", varianceTestPanel);
         addTab("Chi Square Test", chiSquarePanel);
-        addTab("Poker Test", pokerTestPanel);
         addTab("Smirnov Test", smirnovTestPanel);
+        addTab("Poker Test", pokerTestPanel);
     }
 
     public void updateRiTableRows(String[][] tableData) {

@@ -125,7 +125,7 @@ public class PokerTest {
         double maxError = Double.valueOf(sf.getCHIInv2(((100 - acceptanceRate) / 200), tableData.length-1));
 
         Map<String, Double> parametersMap = new HashMap<String, Double>();
-        parametersMap.put("totalError", formatDouble(totalError));
+        parametersMap.put("totalError", totalError);
         parametersMap.put("chiInv", maxError);
         parametersMap.put("result", totalError < maxError ? 1.0 : 0.0);
 

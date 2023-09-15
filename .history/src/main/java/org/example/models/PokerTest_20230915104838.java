@@ -48,9 +48,7 @@ public class PokerTest {
         for (Double currentNumber : randomNumbersList) {
             int[] scoresArray = new int[10];
             String stringDecimal = takeDecimalPart(formatDouble(currentNumber));
-            String currentLabeledData = (stringDecimal.length() < 5) ? 
-                                            String.valueOf(formatDouble(currentNumber)) + "0" : 
-                                            String.valueOf(formatDouble(currentNumber));
+            String currentLabeledData = (stringDecimal.length() < 5) ? String.valueOf(currentNumber) + "0" : String.valueOf(currentNumber);
 
             for (int i = 0; i < stringDecimal.length(); i++) {
                 scoresArray[stringDecimal.charAt(i) - 48]++;
@@ -63,6 +61,10 @@ public class PokerTest {
             boolean fullHouse = false;
             boolean poker = false;
             boolean quintet = false;
+
+            for (int i : scoresArray) {
+                System.out.print(i);
+            }
             
             for (int i : scoresArray) {
                 switch (i) {
@@ -70,54 +72,55 @@ public class PokerTest {
                         if (onePair) {
                             twoPair = true;
                             onePair = false;
+                            System.out.println("Two Pair");
                         } else if (threeOfAKind) {
                             fullHouse = true;
                             onePair = false;
+                            System.out.println("Full House 1");
                         } else {
                             onePair = true;
+                            System.out.println("One Pair");
                         }
                         break;
                     case 3:
                         if (onePair) {
                             fullHouse = true;
                             onePair = false;
+                            System.out.println("Full House 2");
                         } else {
                             threeOfAKind = true;
+                            System.out.println("Three of A Kind");
                         }
                         break;
                     case 4:
                         threeOfAKind = false;
                         poker = true;
+                        System.out.println("poker");
                         break;
                     case 5:
                         poker = false;
                         quintet = true;
+                        System.out.println("penta");
                         break;
                 }
             }
 
             if (onePair) {
                 this.onePair++;
-                labeledData.add(currentLabeledData + " O");
             } else if (twoPair) {
                 this.twoPair++;
-                labeledData.add(currentLabeledData + " K");
             } else if (threeOfAKind) {
                 this.threeOfAKind++;
-                labeledData.add(currentLabeledData + " T");
             } else if (fullHouse) {
                 this.fullHouse++;
-                labeledData.add(currentLabeledData + " F");
             } else if (poker) {
                 this.poker++;
-                labeledData.add(currentLabeledData + " P");
             } else if (quintet) {
                 this.quintet++;
-                labeledData.add(currentLabeledData + " Q");
             } else {
                 this.allDifferent++;
-                labeledData.add(currentLabeledData + " D");
             }
+            System.out.println();
         }
 
         fillPokerRows(randomNumbersList.size());
@@ -125,7 +128,7 @@ public class PokerTest {
         double maxError = Double.valueOf(sf.getCHIInv2(((100 - acceptanceRate) / 200), tableData.length-1));
 
         Map<String, Double> parametersMap = new HashMap<String, Double>();
-        parametersMap.put("totalError", formatDouble(totalError));
+        parametersMap.put("totalError", totalError);
         parametersMap.put("chiInv", maxError);
         parametersMap.put("result", totalError < maxError ? 1.0 : 0.0);
 

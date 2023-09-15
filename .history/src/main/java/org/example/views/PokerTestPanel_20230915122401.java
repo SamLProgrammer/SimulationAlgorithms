@@ -225,7 +225,7 @@ public class PokerTestPanel extends JPanel {
 
                             }
                         }
-                        pokerStatsTable.updateRowsTable(pokerTestResult.getpokerTableData(),statsMap.get("totalError"));
+                        pokerStatsTable.updateRowsTable(pokerTestResult.getpokerTableData());
                     }
                 } else {
                     e.consume();

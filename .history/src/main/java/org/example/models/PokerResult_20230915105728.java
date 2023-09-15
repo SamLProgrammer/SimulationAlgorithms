@@ -7,7 +7,6 @@ public class PokerResult {
     private Map<String, Double> parametersMap;
     private String[][] pokerTableData;
     private String[][] labeledPokerTableData;
-    private ArrayList<String> labeledData;
 
     public PokerResult(Map<String, Double> parametersMap, String[][] pokerTableData, ArrayList<String> labeledData) {
         initComponents(parametersMap, pokerTableData, labeledData);
@@ -16,7 +15,6 @@ public class PokerResult {
     private void initComponents(Map<String, Double> parametersMap, String[][] pokerTableData, ArrayList<String> labeledData) {
         this.parametersMap = parametersMap;
         this.pokerTableData = pokerTableData;
-        this.labeledData = labeledData;
     }
 
     public String[][] getpokerTableData() {
@@ -33,9 +31,5 @@ public class PokerResult {
 
     public void setLabeledPokerTableData(String[][] labeledPokerTableData) {
         this.labeledPokerTableData = labeledPokerTableData;
-    }
-
-    public ArrayList<String> getLabeledData() {
-        return labeledData;
     }
 }

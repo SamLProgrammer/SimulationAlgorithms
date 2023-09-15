@@ -138,7 +138,7 @@ public class PokerTestPanel extends JPanel {
         calculatedResultsConstraint.gridwidth = 2;
         calculatedResultsConstraint.gridheight = 1;
         calculatedResultsConstraint.weightx = 0.25;
-        calculatedResultsConstraint.fill = GridBagConstraints.NORTH;
+        // calculatedResultsConstraint.fill = GridBagConstraints.NORTH;
         // calculatedResultsConstraint.weighty = weightY;
 
         JLabel alphaLabel = new JLabel("\u03B1", SwingConstants.CENTER);
@@ -156,11 +156,10 @@ public class PokerTestPanel extends JPanel {
         calculatedResultsConstraint1.gridwidth = 2;
         calculatedResultsConstraint1.gridheight = 5;
         calculatedResultsConstraint1.weightx = 0.25;
-        calculatedResultsConstraint1.weighty = 0.25;
-        calculatedResultsConstraint1.fill = GridBagConstraints.CENTER;
+        // calculatedResultsConstraint1.fill = GridBagConstraints.CENTER;
         // calculatedResultsConstraint.weighty = weightY;
 
-        parametersPanel.add(pokerStatsTable, calculatedResultsConstraint1);
+        parametersPanel.add(pokerStatsTable, calculatedResultsConstraint);
 
         // =========================================================================================
 
@@ -225,7 +224,6 @@ public class PokerTestPanel extends JPanel {
 
                             }
                         }
-                        pokerStatsTable.updateRowsTable(pokerTestResult.getpokerTableData(),statsMap.get("totalError"));
                     }
                 } else {
                     e.consume();

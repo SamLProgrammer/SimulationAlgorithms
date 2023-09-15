@@ -49,8 +49,8 @@ public class PokerTest {
             int[] scoresArray = new int[10];
             String stringDecimal = takeDecimalPart(formatDouble(currentNumber));
             String currentLabeledData = (stringDecimal.length() < 5) ? 
-                                            String.valueOf(formatDouble(currentNumber)) + "0" : 
-                                            String.valueOf(formatDouble(currentNumber));
+                                            String.valueOf(currentNumber) + "0" : 
+                                            String.valueOf(currentNumber);
 
             for (int i = 0; i < stringDecimal.length(); i++) {
                 scoresArray[stringDecimal.charAt(i) - 48]++;
@@ -125,7 +125,7 @@ public class PokerTest {
         double maxError = Double.valueOf(sf.getCHIInv2(((100 - acceptanceRate) / 200), tableData.length-1));
 
         Map<String, Double> parametersMap = new HashMap<String, Double>();
-        parametersMap.put("totalError", formatDouble(totalError));
+        parametersMap.put("totalError", totalError);
         parametersMap.put("chiInv", maxError);
         parametersMap.put("result", totalError < maxError ? 1.0 : 0.0);
 

@@ -156,7 +156,7 @@ public class PokerTestPanel extends JPanel {
         calculatedResultsConstraint1.gridwidth = 2;
         calculatedResultsConstraint1.gridheight = 5;
         calculatedResultsConstraint1.weightx = 0.25;
-        calculatedResultsConstraint1.weighty = 0.25;
+        calculatedResultsConstraint1.weighty = 0.75;
         calculatedResultsConstraint1.fill = GridBagConstraints.CENTER;
         // calculatedResultsConstraint.weighty = weightY;
 
@@ -225,7 +225,6 @@ public class PokerTestPanel extends JPanel {
 
                             }
                         }
-                        pokerStatsTable.updateRowsTable(pokerTestResult.getpokerTableData(),statsMap.get("totalError"));
                     }
                 } else {
                     e.consume();

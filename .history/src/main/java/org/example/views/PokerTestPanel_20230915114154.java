@@ -1,6 +1,7 @@
 package org.example.views;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -23,11 +24,16 @@ import org.example.models.PokerResult;
 public class PokerTestPanel extends JPanel {
 
     private TablePanel RiTable;
-    private PokerStatsTable pokerStatsTable;
     private JPanel parametersPanel;
     private JPanel resultPanel;
     private JTextArea acceptanceLevelField;
     private JTextArea alphaValueArea;
+    private JTextArea halfAlfaValueArea;
+    private JTextArea inverseHalfAlfaValueArea;
+    private JTextArea halfAlphaXValueArea;
+    private JTextArea inverseHalfAlphaXValueArea;
+    private JTextArea leftLimitArea;
+    private JTextArea rightLimitArea;
     private JTextArea averagePane;
     private JTextArea resultPane;
 
@@ -49,7 +55,6 @@ public class PokerTestPanel extends JPanel {
 
         double weightY = 1.0 / 7;
         RiTable = new TablePanel();
-        pokerStatsTable = new PokerStatsTable();
         parametersPanel = new JPanel(new GridBagLayout());
         resultPanel = new JPanel(new GridBagLayout());
 
@@ -75,11 +80,11 @@ public class PokerTestPanel extends JPanel {
         JPanel resultContainer = new JPanel(new BorderLayout());
         JPanel averageContainer = new JPanel(new BorderLayout());
         JLabel resultLabel = new JLabel("Result: ");
-        JLabel averageLabel = new JLabel("Chi Inv: ");
+        JLabel averageLabel = new JLabel("Variance: ");
         resultPane = new JTextArea(1, 6);
         resultPane.setName("result");
         averagePane = new JTextArea(1, 6);
-        averagePane.setName("chiInv");
+        averagePane.setName("variance");
         averageContainer.add(averageLabel, BorderLayout.WEST);
         averageContainer.add(averagePane);
         resultContainer.add(resultLabel, BorderLayout.WEST);
@@ -138,7 +143,7 @@ public class PokerTestPanel extends JPanel {
         calculatedResultsConstraint.gridwidth = 2;
         calculatedResultsConstraint.gridheight = 1;
         calculatedResultsConstraint.weightx = 0.25;
-        calculatedResultsConstraint.fill = GridBagConstraints.NORTH;
+        calculatedResultsConstraint.fill = GridBagConstraints.CENTER;
         // calculatedResultsConstraint.weighty = weightY;
 
         JLabel alphaLabel = new JLabel("\u03B1", SwingConstants.CENTER);
@@ -149,18 +154,6 @@ public class PokerTestPanel extends JPanel {
         alphaContainer.add(alphaLabel, BorderLayout.WEST);
         alphaContainer.add(alphaValueArea);
         parametersPanel.add(alphaContainer, calculatedResultsConstraint);
-
-        GridBagConstraints calculatedResultsConstraint1 = new GridBagConstraints();
-        calculatedResultsConstraint1.gridx = 0;
-        calculatedResultsConstraint1.gridy = 2;
-        calculatedResultsConstraint1.gridwidth = 2;
-        calculatedResultsConstraint1.gridheight = 5;
-        calculatedResultsConstraint1.weightx = 0.25;
-        calculatedResultsConstraint1.weighty = 0.25;
-        calculatedResultsConstraint1.fill = GridBagConstraints.CENTER;
-        // calculatedResultsConstraint.weighty = weightY;
-
-        parametersPanel.add(pokerStatsTable, calculatedResultsConstraint1);
 
         // =========================================================================================
 
@@ -225,7 +218,6 @@ public class PokerTestPanel extends JPanel {
 
                             }
                         }
-                        pokerStatsTable.updateRowsTable(pokerTestResult.getpokerTableData(),statsMap.get("totalError"));
                     }
                 } else {
                     e.consume();

@@ -35,8 +35,8 @@ public class MainTabbedPanel extends JTabbedPane {
         addTab("Means Test", meansTestPanel);
         addTab("Variance Test", varianceTestPanel);
         addTab("Chi Square Test", chiSquarePanel);
-        addTab("Poker Test", pokerTestPanel);
         addTab("Smirnov Test", smirnovTestPanel);
+        addTab("Poker Test", pokerTestPanel);
     }
 
     public void updateRiTableRows(String[][] tableData) {

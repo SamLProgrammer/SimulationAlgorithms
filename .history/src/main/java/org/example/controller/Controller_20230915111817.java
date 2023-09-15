@@ -76,7 +76,7 @@ public class Controller {
 
     public PokerResult invokePokerTest(double acceptanceRate) {
         PokerResult pokerResult = tests.invokePokerTest(acceptanceRate, randomAlgorithms.getCurrentRandomList());
-        pokerResult.setLabeledPokerTableData(createRandomsTableDataFromStringArray(pokerResult.getLabeledData(), 5));
+        pokerResult.setLabeledPokerTableData(createRandomsTableDataFromStringArray(pokerResult.getLabeledData(), 0));
         return pokerResult;
     }
 

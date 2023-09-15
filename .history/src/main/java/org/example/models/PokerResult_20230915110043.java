@@ -34,8 +34,4 @@ public class PokerResult {
     public void setLabeledPokerTableData(String[][] labeledPokerTableData) {
         this.labeledPokerTableData = labeledPokerTableData;
     }
-
-    public ArrayList<String> getLabeledData() {
-        return labeledData;
-    }
 }

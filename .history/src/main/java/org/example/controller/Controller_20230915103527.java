@@ -30,12 +30,28 @@ public class Controller {
 
     public void generateWithMiddleSquare(int iterations, String seed, int columns) {
         randomAlgorithms.generateWithMiddleSquare(iterations, seed);
-        mainWindow.updateRiTableRows(createRandomsTableData(randomAlgorithms.getCurrentRandomList(), columns));
+        ArrayList<Double> randomsList = randomAlgorithms.getCurrentRandomList();
+        int rowsNumber = randomsList.size() / columns;
+        rowsNumber = (randomsList.size() % columns == 0) ? rowsNumber : rowsNumber + 1;
+        String[][] tableData = new String[rowsNumber][columns];
+
+        for(int i = 0; i < randomsList.size(); i++) {
+            tableData[i/columns][i % columns] = String.valueOf(randomsList.get(i));
+        }
+        mainWindow.updateRiTableRows(tableData);
     }
 
     public void generateWithCongruent(int x0, int k, int c, int g, int iterations, char type, int columns) {
         randomAlgorithms.generateWithCongruent(x0, k, c, g, iterations, type);
-        mainWindow.updateRiTableRows(createRandomsTableData(randomAlgorithms.getCurrentRandomList(), columns));
+        ArrayList<Double> randomsList = randomAlgorithms.getCurrentRandomList();
+        int rowsNumber = randomsList.size() / columns;
+        rowsNumber = (randomsList.size() % columns == 0) ? rowsNumber : rowsNumber + 1;
+        String[][] tableData = new String[rowsNumber][columns];
+
+        for(int i = 0; i < randomsList.size(); i++) {
+            tableData[i/columns][i % columns] = String.valueOf(randomsList.get(i));
+        }
+        mainWindow.updateRiTableRows(tableData);
     }
 
     private String[][] createRandomsTableData(ArrayList<Double> randomsList, int columns) {
@@ -46,18 +62,6 @@ public class Controller {
 
         for(int i = 0; i < randomsList.size(); i++) {
             tableData[i/columns][i % columns] = String.valueOf(randomsList.get(i));
-        }
-        return tableData;
-    }
-
-    private String[][] createRandomsTableDataFromStringArray(ArrayList<String> randomsList, int columns) {
-
-        int rowsNumber = randomsList.size() / columns;
-        rowsNumber = (randomsList.size() % columns == 0) ? rowsNumber : rowsNumber + 1;
-        String[][] tableData = new String[rowsNumber][columns];
-
-        for(int i = 0; i < randomsList.size(); i++) {
-            tableData[i/columns][i % columns] = randomsList.get(i);
         }
         return tableData;
     }
@@ -75,9 +79,7 @@ public class Controller {
     }
 
     public PokerResult invokePokerTest(double acceptanceRate) {
-        PokerResult pokerResult = tests.invokePokerTest(acceptanceRate, randomAlgorithms.getCurrentRandomList());
-        pokerResult.setLabeledPokerTableData(createRandomsTableDataFromStringArray(pokerResult.getLabeledData(), 5));
-        return pokerResult;
+        return tests.invokePokerTest(acceptanceRate, randomAlgorithms.getCurrentRandomList());
     }
 
 }
