@@ -22,7 +22,6 @@ public class MiddleSquare {
     }
     public ArrayList<Double> startSquaresGeneration(String seedString, int iterations, ArrayList<Double> risList) {
         if(iterations > 0) {
-            System.out.println("=========== Iteration " + iterations + " ===========");
             int seed = Integer.valueOf(seedString);
             int sqrdSeed = intToSquare(seed);
             sqrdSeed = (sqrdSeed < 1) ? sqrdSeed*-1 : sqrdSeed;
@@ -31,9 +30,6 @@ public class MiddleSquare {
             while(stringSqrdSeed.length() < (seedString.length() * 2)) {
                 stringSqrdSeed = '0' + stringSqrdSeed;
             }
-            System.out.println(sqrdSeed);
-            System.out.println("stringSqrdSeed");
-            System.out.println(stringSqrdSeed);
 
             int firstPointer = stringSqrdSeed.length() / 2 - seedString.length() / 2;
             int secondPointer = firstPointer + seedString.length();
@@ -42,9 +38,6 @@ public class MiddleSquare {
             for (int i = firstPointer; i < secondPointer; i++) {
                 nextSeed += stringSqrdSeed.charAt(i);
             }
-            System.out.println("======================================");
-            System.out.println("Next Seed: ");
-            System.out.println(nextSeed);
             risList.add(Double.valueOf(nextSeed)/Math.pow(10,nextSeed.length()));
 
             return startSquaresGeneration(nextSeed, iterations-1, risList);
