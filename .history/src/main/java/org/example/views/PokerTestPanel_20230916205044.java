@@ -251,6 +251,18 @@ public class PokerTestPanel extends JPanel {
 
     }
 
+    private JPanel getJPanelParentComponent(Component component) {
+        if (component == null) {
+            return null;
+        }
+
+        if (component instanceof JPanel) {
+            return (JPanel) component;
+        } else {
+            return getJPanelParentComponent(component.getParent());
+        }
+    }
+
     private PokerResult invokePokerTest() {
         String stringValue = acceptanceLevelField.getText();
         if (stringValue.charAt(stringValue.length() - 1) == '.') {

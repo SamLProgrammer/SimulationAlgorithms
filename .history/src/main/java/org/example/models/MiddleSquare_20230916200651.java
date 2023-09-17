@@ -30,6 +30,7 @@ public class MiddleSquare {
             while(stringSqrdSeed.length() < (seedString.length() * 2)) {
                 stringSqrdSeed = '0' + stringSqrdSeed;
             }
+            
             int firstPointer = stringSqrdSeed.length() / 2 - seedString.length() / 2;
             int secondPointer = firstPointer + seedString.length();
 

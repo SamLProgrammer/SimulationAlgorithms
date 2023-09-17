@@ -105,7 +105,7 @@ public class RiCommandsPanel extends JPanel {
                         cTextField.setEnabled(true);
                         break;
                 }
-                submitGenerationButton.setEnabled(validateFieldsSet(toValidateFieldsCongruential));
+                validateFieldsSet(toValidateFieldsCongruential);
             }
         });
 
